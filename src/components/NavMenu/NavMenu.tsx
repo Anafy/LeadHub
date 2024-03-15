@@ -1,12 +1,12 @@
 import styles from './NavMenu.module.sass'
 
 import Logo from "../../assets/imgs/logo.svg?react"
-import Icon1 from "../../assets/imgs/menu-svg1.svg?react"
-import Icon2 from "../../assets/imgs/menu-svg2.svg?react"
-import Icon3 from "../../assets/imgs/menu-svg3.svg?react"
-import Icon4 from "../../assets/imgs/menu-svg4.svg?react"
-import Icon5 from "../../assets/imgs/menu-svg5.svg?react"
-import Icon6 from "../../assets/imgs/menu-svg6.svg?react"
+// import Icon1 from "../../assets/imgs/menu-svg1.svg?react"
+// import Icon2 from "../../assets/imgs/menu-svg2.svg?react"
+// import Icon3 from "../../assets/imgs/menu-svg3.svg?react"
+// import Icon4 from "../../assets/imgs/menu-svg4.svg?react"
+// import Icon5 from "../../assets/imgs/menu-svg5.svg?react"
+// import Icon6 from "../../assets/imgs/menu-svg6.svg?react"
 import { Link } from 'react-router-dom'
 
 export default function NavMenu() {
@@ -32,27 +32,39 @@ export default function NavMenu() {
                     ID: 111111111111
                 </p>
                 <Link to='/cabinet/main' className={styles.menu__link}>
-                    <Icon1 className={styles.menu__icon}/>
+                    <span className={styles.menu__icon}>
+                        🚀
+                    </span>
                     Главная
                 </Link>
                 <Link to='/cabinet/ai' className={styles.menu__link}>
-                    <Icon2 className={styles.menu__icon}/>
+                    <span className={styles.menu__icon}>
+                        👾
+                    </span>
                     Нейросети
                 </Link>
                 <Link to='/cabinet/marathon' className={styles.menu__link}>
-                    <Icon3 className={styles.menu__icon}/>
+                    <span className={styles.menu__icon}>
+                        🎁
+                    </span>
                     Марафон призов
                 </Link>
                 <Link to='/cabinet/profile' className={styles.menu__link}>
-                    <Icon4 className={styles.menu__icon}/>
+                    <span className={styles.menu__icon}>
+                        👤
+                    </span>
                     Профиль
                 </Link>
                 <Link to='/cabinet/support' className={styles.menu__link}>
-                    <Icon5 className={styles.menu__icon}/>
+                    <span className={styles.menu__icon}>
+                        ⚙️
+                    </span>
                     Тех. поддержка
                 </Link>
                 <Link to='/cabinet/partners' className={styles.menu__link}>
-                    <Icon6 className={styles.menu__icon}/>
+                    <span className={styles.menu__icon}>
+                        🤝
+                    </span>
                     Партнерская программа
                 </Link>
             </nav>

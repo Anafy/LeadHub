@@ -27,12 +27,20 @@ export default function Chat({ai, title} : ChatProps) {
 
     const dataGPT: ChatMessage[] = [
         {
+            role: 'assistant',
+            content: 'Hi! How can I help you today?'
+        },
+        {
             role: 'user',
-            content: 'Hi! How are you?'
+            content: 'Do you have any questions do I need help?'
+        },
+        {
+            role: 'user',
+            content: 'Do you have any questions do I need help?'
         },
         {
             role: 'assistant',
-            content: 'I am fine, thank you! How can I help you today?'
+            content: 'Hi! How can I help you today?'
         }
     ]
 
@@ -47,6 +55,15 @@ export default function Chat({ai, title} : ChatProps) {
                         {title}
                     </p>
                 </div>
+                {/* <div className={styles.chat__outline}>
+                    <span className={styles.chat__space} />
+                    <span className={styles.chat__line} />
+                    <p className={styles.chat__text}>
+                        Today, March 12
+                    </p>
+                    <span className={styles.chat__line} />
+                    <span className={styles.chat__space} />
+                </div> */}
                 <div className={styles.chat__bottom}>
                     <ul className={styles.chat__messages}>
                         {(ai === 'gpt' ? dataGPT : dataDalle).map((item: ChatMessage, index: number) => (

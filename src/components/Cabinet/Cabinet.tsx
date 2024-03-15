@@ -4,7 +4,7 @@ import Choose from "../../pages/Ai/Ai";
 import NavMenu from "../NavMenu/NavMenu";
 
 import styles from './Cabinet.module.sass'
-import Chat from "../../pages/Chats/Chat";
+import Chat from "../../pages/Chat/Chat";
 
 
 export default function Cabinet() {
@@ -15,7 +15,7 @@ export default function Cabinet() {
                 <Route path='/main' element={<Main/>} />
                 <Route path='/ai' element={<Choose/>} />
                 <Route path='/ai/chatgpt' element={<Chat ai={'gpt'} title={'ChatGPT'} />} />
-                <Route path='/ai/dalle' element={ <Chat ai={'dalle'} title={'Dall-E'} /> } />
+                <Route path='/ai/dalle' element={ <Chat ai={'dalle'} title={'DALL-E'} /> } />
                 <Route path='*' element={<Navigate to={`/cabinet/main`} replace />} />
             </Routes>
         </main>
