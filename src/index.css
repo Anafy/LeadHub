@@ -92,6 +92,7 @@ input {
 }
   
 #root {
+  display: flex;
   position: relative;
   min-width: 320px;
   padding: 0;

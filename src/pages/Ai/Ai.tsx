@@ -1,42 +1,41 @@
-import styles from './Choose.module.sass'
-
-import { Link } from 'react-router-dom'
+import styles from './Ai.module.sass'
 
 import Chatgpt from "../../assets/imgs/chatgpt.svg?react"
 import Dalle from "../../assets/imgs/dalle.svg?react"
+import { Link } from 'react-router-dom'
 
-export default function Choose() {
+export default function Ai() {
 
     return (
         <>
-            <div className={styles.choose}>
-                <div className={styles.choose__container}>
-                    <p className={styles.choose__title}>
+            <div className={styles.ai}>
+                <div className={styles.ai__container}>
+                    <p className={styles.ai__title}>
                         Выберите нейросеть
                     </p>
-                    <div className={styles.choose__block}>
-                        <div className={styles.choose__content}>
-                            <div className={styles.choose__gpt}>
-                                <Chatgpt className={styles.choose__logo}/>
+                    <div className={styles.ai__block}>
+                        <Link to='/cabinet/ai/chatgpt' className={styles.ai__content}>
+                            <div className={styles.ai__gpt}>
+                                <Chatgpt className={styles.ai__logo}/>
                             </div>
-                            <p className={styles.choose__subtitle}>
+                            <p className={styles.ai__subtitle}>
                                 ChatGPT
                             </p>
-                            <p className={styles.choose__descr}>
+                            <p className={styles.ai__descr}>
                                 Чат-бот с генеративным искусственным интеллектом, разработанный компанией OpenAI и способный работать в диалоговом режиме, поддерживающий запросы на естественных языках
                             </p>
-                        </div>
-                        <div className={styles.choose__content}>
-                            <div className={styles.choose__dalle}>
-                                <Dalle className={styles.choose__logo}/>
+                        </Link>
+                        <Link to='/cabinet/ai/dalle' className={styles.ai__content}>
+                            <div className={styles.ai__dalle}>
+                                <Dalle className={styles.ai__logo}/>
                             </div>
-                            <p className={styles.choose__subtitle}>
+                            <p className={styles.ai__subtitle}>
                                 Dall-E
                             </p>
-                            <p className={styles.choose__descr}>
+                            <p className={styles.ai__descr}>
                                 Нейронная сеть НКО OpenAI, созданная при финансовой поддержке Microsoft, способная генерировать высококачественные изображения, исходя из текстовых описаний на английском языке.
                             </p>
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>

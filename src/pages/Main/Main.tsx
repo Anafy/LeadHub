@@ -1,6 +1,6 @@
 import styles from './Main.module.sass'
 
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function Main() {
 
@@ -15,12 +15,12 @@ export default function Main() {
                         CHATGURU делает передовые технологии доступными каждому, обеспечивая плавное взаимодействие и мгновенные результаты. Наша платформа адаптирована для тех, кто ищет эффективные решения без излишних сложностей, предлагая интуитивно понятный интерфейс и поддержку на русском языке. 
                     </p>
                     <div className={styles.main__btns}>
-                        <button className={styles.main__btn}>
+                        <Link to='/cabinet/marathon' className={styles.main__btn}>
                             Марафон призов 🔥
-                        </button>
-                        <button className={styles.main__btn}>
+                        </Link>
+                        <Link to='/cabinet/ai' className={styles.main__btn}>
                             Перейти
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>
