@@ -71,7 +71,7 @@ export default function Chat({ai, title} : ChatProps) {
                         ))}
                     </ul>
                     <form action="" className={styles.chat__form}>
-                        <input className={styles.chat__input} type="text" name="text" placeholder="Отправьте сообщение"/>
+                        <input className={styles.chat__input} type="text" name="text" placeholder="Отправьте сообщение" autoComplete="off"/>
                         <button type="submit" className={styles.chat__submit}>
                             <Send className={styles.chat__submit_svg}/>
                         </button>

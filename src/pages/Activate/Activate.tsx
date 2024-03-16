@@ -4,11 +4,12 @@ import { Formik, Field, Form} from "formik"
 
 import * as Yup from "yup"
 
-// import Icon from "../../assets/imgs/activate.svg?react"
 import Paypal from "../../assets/imgs/paypal.svg?react"
+import CheckmarkSvg from "../../assets/imgs/checkbox.svg?react"
 import Visa from "../../assets/imgs/visa.svg?react"
 import Applepay from "../../assets/imgs/applepay.svg?react"
 import Mastercard from "../../assets/imgs/mastercard.svg?react"
+import { useState } from 'react'
 
 export default function Activate() {
 
@@ -18,7 +19,7 @@ export default function Activate() {
             .required("Required"),
     })
 
-    const submitForm = async (values, setFieldError) => {
+    const submitForm = async (values: {email: string}) => {
         try {
           console.log('Form submitted with values:', values);
           return null;
@@ -26,7 +27,13 @@ export default function Activate() {
           console.error('Error submitting form:', error);
           return 'error.submitting.form';
         }
-      };
+    };
+
+    const [isChecked, setIsChecked] = useState(true);
+
+    const handleCheckboxChange = () => {
+        setIsChecked(value => !value);
+    };
 
     return (
         <>
@@ -37,20 +44,16 @@ export default function Activate() {
                 <div className={styles.activate__container}>
                     <Formik
                         initialValues={{
-                        email: '',
+                            email: '',
                         }}
                         validationSchema={EmailFormSchema}
-                        onSubmit={async (values, { setSubmitting, setFieldError }) => {
-                            const error = await submitForm(values, setFieldError)
-                            if (error === 'email.already.used') {
-                                setFieldError('email', 'Email already used')
-                            }
+                        onSubmit={async (values, { setSubmitting, /*setFieldError*/ }) => {
+                            await submitForm(values)
                             setSubmitting(false)
                         }}
                     >
                         {({ isSubmitting, errors, handleSubmit }) => (
                             <Form className={styles.activate__form} onSubmit={handleSubmit}>
-                                {/* <Icon className={styles.activate__svg}/> */}
                                 <p className={styles.activate__circle}>
                                     ⭐️
                                 </p>
@@ -65,12 +68,20 @@ export default function Activate() {
                                 }} />
                                 <div className={styles.activate__block}>
                                     <label className={styles.activate__checkbox}>
-                                        <input type="checkbox" className={styles.activate__checkbox_input}/>
-                                        <span className={styles.activate__checkbox_box}></span>
-                                        <span className={styles.activate__checkbox_check}></span>
+                                        <input 
+                                            type="checkbox" 
+                                            className={styles.activate__checkbox_input} 
+                                            checked={isChecked} 
+                                            onChange={handleCheckboxChange}
+                                        />
+                                        <span className={styles.activate__checkbox_box}>
+                                            <CheckmarkSvg className={styles.activate__checkbox_mark} style={{
+                                                opacity: isChecked ? 1 : 0
+                                            }} />
+                                        </span>
                                     </label>
                                     <p className={styles.activate__alert}>
-                                        Я согласен с <span className={styles.activate__alert_underline}> условиями пользовательского соглашения и правилами платформы ChatGuru</span>
+                                        Я согласен с <a href='' target='_blank' rel='noreferrer noopenner'  className={styles.activate__alert_underline}> условиями пользовательского соглашения и правилами платформы ChatGuru</a>
                                     </p>
                                 </div>
                                 <button type="submit" disabled={isSubmitting} className={styles.activate__btn}>

@@ -1,5 +1,5 @@
 .auth
-    margin: 276px auto
+    margin: auto
     max-width: 571px
     border-radius: 6px
     background-color: #FFFFFF
@@ -69,38 +69,50 @@
         color: #AAAAAA
     &__block
         display: flex
-        align-items: flex-start
+        align-items: center
         justify-content: flex-start
         margin-bottom: 30px
+        cursor: pointer
     &__alert
+        pointer-events: none
         font-size: 0.75em
         line-height: 1
         color: #AAAAAA
         text-align: left
         &_underline
             text-decoration: underline
-    &__checkbox
+    &__checkbox 
         display: inline-block
         position: relative
-        padding-left: 25px
         cursor: pointer
-        &_box
+        margin-right: 10px
+        &_input
             position: absolute
+            opacity: 0
+            cursor: pointer
+            height: 0
+            width: 0
+        &_box
+            position: relative
             top: 0
             left: 0
             width: 18px
             height: 18px
             border: 1px solid #D7D7D7
             border-radius: 4px
-        &_check
-            position: absolute
-            top: 4px
-            left: 4px
-            width: 10px
-            height: 10px
-            border-radius: 2px
-            background-color: white
-            display: none
+            display: flex
+            align-items: center
+            justify-content: center
+            padding: 3px
+            box-sizing: border-box
+            display: flex
+            align-items: center
+            justify-content: center
+        &_mark
+            width: 100%
+            height: auto
+            opacity: 0
+            transition: opacity .15s ease-in-out
     &__form
         max-width: 377px
         width: 100%

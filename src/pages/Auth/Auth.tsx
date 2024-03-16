@@ -1,8 +1,10 @@
 import styles from './Auth.module.sass'
-import { Link } from 'react-router-dom'
 import { Formik, Field, Form} from "formik"
+import { useState } from 'react';
 
 import * as Yup from "yup"
+
+import CheckmarkSvg from "../../assets/imgs/checkbox.svg?react"
 
 export default function Auth() {
 
@@ -15,7 +17,7 @@ export default function Auth() {
             .required("Required"),
     })
 
-    const submitForm = async (values, setFieldError) => {
+    const submitForm = async (values: {email: string, password: string}) => {
         try {
           console.log('Form submitted with values:', values);
           return null;
@@ -23,22 +25,25 @@ export default function Auth() {
           console.error('Error submitting form:', error);
           return 'error.submitting.form';
         }
-      };
+    };
+
+    const [isChecked, setIsChecked] = useState(true);
+
+    const handleCheckboxChange = () => {
+        setIsChecked(value => !value);
+    };
 
     return (
         <>
             <div className={styles.auth}>
                 <Formik
                     initialValues={{
-                    email: '',
-                    password: ''
+                        email: '',
+                        password: ''
                     }}
                     validationSchema={LoginFormSchema}
-                    onSubmit={async (values, { setSubmitting, setFieldError }) => {
-                        const error = await submitForm(values, setFieldError)
-                        if (error === 'email.already.used') {
-                            setFieldError('email', 'Email already used')
-                        }
+                    onSubmit={async (values, { setSubmitting, /*setFieldError*/ }) => {
+                        await submitForm(values)
                         setSubmitting(false)
                     }}
                 >
@@ -56,11 +61,18 @@ export default function Auth() {
                             <Field type="password" name="password" className={styles.auth__input} placeholder="Пароль*" autoComplete="password" style={{
                                 borderColor: errors.password && 'red'
                             }} />
-                            <div className={styles.auth__block}>
+                            <div className={styles.auth__block} onClick={handleCheckboxChange}>
                                 <label className={styles.auth__checkbox}>
-                                    <input type="checkbox" className={styles.auth__checkbox_input}/>
-                                    <span className={styles.auth__checkbox_box}></span>
-                                    <span className={styles.auth__checkbox_check}></span>
+                                    <input 
+                                        type="checkbox" 
+                                        className={styles.auth__checkbox_input} 
+                                        checked={isChecked} 
+                                    />
+                                    <span className={styles.auth__checkbox_box}>
+                                        <CheckmarkSvg className={styles.auth__checkbox_mark} style={{
+                                            opacity: isChecked ? 1 : 0
+                                        }} />
+                                    </span>
                                 </label>
                                 <p className={styles.auth__alert}>
                                     Запомнить меня
