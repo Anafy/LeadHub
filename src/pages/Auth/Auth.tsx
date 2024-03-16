@@ -67,6 +67,7 @@ export default function Auth() {
                                         type="checkbox" 
                                         className={styles.auth__checkbox_input} 
                                         checked={isChecked} 
+                                        onChange={handleCheckboxChange}
                                     />
                                     <span className={styles.auth__checkbox_box}>
                                         <CheckmarkSvg className={styles.auth__checkbox_mark} style={{
