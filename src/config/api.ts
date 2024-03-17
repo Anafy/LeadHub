@@ -13,7 +13,8 @@ export default async function apiFetch(
         method,
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'
     };
 
     if (body) {
