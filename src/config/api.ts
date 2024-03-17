@@ -21,7 +21,7 @@ export default async function apiFetch(
     }
 
     try {
-        const response = await fetch(`https://api.chat-guru.ru${url}`, options);
+        const response = await fetch(`https://chat-guru.ru/api${url}`, options);
         const data = await response.json();
 
         if (!response.ok) {
