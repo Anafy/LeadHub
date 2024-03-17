@@ -24,6 +24,13 @@ export default async function apiFetch(
         const response = await fetch(`https://chat-guru.ru/api${url}`, options);
         const data = await response.json();
 
+        if (response.status === 401) {
+            if (type === 'cabinet') {
+                navigate('/auth');
+            }
+            throw new Error(data.message);
+        }
+
         if (!response.ok) {
             throw new Error(data.message || 'Something went wrong');
         }
