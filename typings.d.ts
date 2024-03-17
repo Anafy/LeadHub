@@ -15,3 +15,17 @@ interface ChatMessage {
     role: string,
     content: ChatMessageContent
 }
+
+interface User {
+    id: number,
+    email: string,
+    subscription: string,
+    registered: Date,
+    username: string
+}
+
+interface UserContextProps {
+    user: User | null;
+    setUser: React.Dispatch<React.SetStateAction<User | null>>;
+    updateUser: () => Promise<null>;
+}

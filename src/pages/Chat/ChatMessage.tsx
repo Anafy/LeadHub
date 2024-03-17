@@ -2,7 +2,7 @@
 import styles from "./Chat.module.sass"
 import chatgpt from "../../assets/imgs/chatgpt.png"
 
-export default function ChatMessage({message, title}: {message: ChatMessage, title: string}) {
+export default function ChatMessage({message, title, type}: {message: ChatMessage, title: string, type: string}) {
     return (
         <li className={styles.chat__message}>
             <div className={styles.chat__message_avatar}>
@@ -18,14 +18,8 @@ export default function ChatMessage({message, title}: {message: ChatMessage, tit
                 <p className={styles.chat__message_subtitle}>
                     {message.role === 'user' ? 'You' : title}
                 </p>
-                {Array.isArray(message.content) ? (
-                    <ul className={styles.chat__message_images}>
-                        {message.content.map((content: string, index: number) => (
-                            <li key={index} className={styles.chat__message_image} style={{
-                                backgroundImage: `url(${content})`
-                            }} />
-                        ))}
-                    </ul>
+                { message.role === 'assistant' && type === 'dalle' ? (
+                    <img src={`${message.content}`} className={styles.chat__message_image} />
                 ) : (
                     <p className={styles.chat__message_descr}>
                         {message.content}

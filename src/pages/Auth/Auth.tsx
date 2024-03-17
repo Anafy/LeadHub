@@ -5,29 +5,42 @@ import { useState } from 'react';
 import * as Yup from "yup"
 
 import CheckmarkSvg from "../../assets/imgs/checkbox.svg?react"
+import apiFetch from '../../config/api';
+
+import { useSnackbar } from 'notistack';
+import { useNavigate } from 'react-router-dom';
 
 export default function Auth() {
 
+    const { enqueueSnackbar } = useSnackbar();
+    
+    const [isChecked, setIsChecked] = useState(true);
+
+    const navigate = useNavigate()
+
     const LoginFormSchema = Yup.object().shape({
-        email: Yup.string()
-            .email("Invalid email address")
-            .required("Required"),
-        password: Yup.string()
-            .min(4, "Must be longer than 4 characters")
+        key: Yup.string()
+            .matches(/^[A-Za-z0-9]{8}$/, "Invalid key")
             .required("Required"),
     })
 
-    const submitForm = async (values: {email: string, password: string}) => {
+    const submitForm = async (values: {key: string}) => {
         try {
-          console.log('Form submitted with values:', values);
-          return null;
+            console.log('Form submitted with values:', values);
+            await apiFetch('/auth/login', 'POST', {
+                auth_token: values.key,
+                remember: isChecked
+            }, null, enqueueSnackbar, navigate).then((res) => {
+                if (res.status === true) {
+                    navigate('/cabinet')
+                }
+            })
+            return null
         } catch (error) {
           console.error('Error submitting form:', error);
           return 'error.submitting.form';
         }
     };
-
-    const [isChecked, setIsChecked] = useState(true);
 
     const handleCheckboxChange = () => {
         setIsChecked(value => !value);
@@ -38,16 +51,15 @@ export default function Auth() {
             <div className={styles.auth}>
                 <Formik
                     initialValues={{
-                        email: '',
-                        password: ''
+                        key: ''
                     }}
                     validationSchema={LoginFormSchema}
-                    onSubmit={async (values, { setSubmitting, /*setFieldError*/ }) => {
+                    onSubmit={async (values, { setSubmitting }) => {
                         await submitForm(values)
                         setSubmitting(false)
                     }}
                 >
-                    {({ isSubmitting, errors, handleSubmit }) => (
+                    {({ isSubmitting, errors, handleSubmit, setFieldValue }) => (
                         <Form className={styles.auth__form} onSubmit={handleSubmit}>
                             <p className={styles.auth__circle}>
                                 💫
@@ -55,12 +67,21 @@ export default function Auth() {
                             <p className={styles.auth__title}>
                                 Вход в личный кабинет
                             </p>
-                            <Field type="email" name="email" className={styles.auth__input} placeholder="Email*" autoComplete="email" style={{
-                                borderColor: errors.email && 'red'
-                            }} />
-                            <Field type="password" name="password" className={styles.auth__input} placeholder="Пароль*" autoComplete="password" style={{
-                                borderColor: errors.password && 'red'
-                            }} />
+                            <Field 
+                                type="text" 
+                                name="key" 
+                                className={styles.auth__input} 
+                                placeholder="Введите ключ доступа" 
+                                autoComplete="off" 
+                                style={{
+                                    borderColor: errors.key && 'red'
+                                }}
+                                maxLength={8}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                    const value = e.target.value.replace(/[^A-Za-z0-9]/g, '');
+                                    setFieldValue('key', value);
+                                }}
+                            />
                             <div className={styles.auth__block} onClick={handleCheckboxChange}>
                                 <label className={styles.auth__checkbox}>
                                     <input 
