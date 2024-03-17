@@ -40,11 +40,10 @@ export default function Chat({ai, title} : ChatProps) {
     const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (user !== null) {
-            const messageState = message
-            setMessage('')
             await apiFetch(`/generator/${ai}`, 'POST', {
-                user_message: messageState
+                user_message: message
             }, 'cabinet', enqueueSnackbar, navigate, showLoading, hideLoading).then((res) => {
+                setMessage('')
                 setData(res.messages)
             })
         }
@@ -77,7 +76,7 @@ export default function Chat({ai, title} : ChatProps) {
                         ))}
                     </ul>
                     <form action="" className={styles.chat__form} onSubmit={sendMessage}>
-                        <input className={styles.chat__input} type="text" name="text" placeholder="Отправьте сообщение" autoComplete="off" value={message} onChange={(e) => setMessage(e.target.value)} />
+                        <input maxLength={300} className={styles.chat__input} type="text" name="text" placeholder="Отправьте сообщение" autoComplete="off" value={message} onChange={(e) => setMessage(e.target.value)} />
                         <button type="submit" className={styles.chat__submit}>
                             <Send className={styles.chat__submit_svg}/>
                         </button>
