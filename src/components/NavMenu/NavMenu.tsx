@@ -1,15 +1,12 @@
 import styles from './NavMenu.module.sass'
 
 import Logo from "../../assets/imgs/logo.svg?react"
-// import Icon1 from "../../assets/imgs/menu-svg1.svg?react"
-// import Icon2 from "../../assets/imgs/menu-svg2.svg?react"
-// import Icon3 from "../../assets/imgs/menu-svg3.svg?react"
-// import Icon4 from "../../assets/imgs/menu-svg4.svg?react"
-// import Icon5 from "../../assets/imgs/menu-svg5.svg?react"
-// import Icon6 from "../../assets/imgs/menu-svg6.svg?react"
 import { Link } from 'react-router-dom'
+import { useUserContext } from '../../context/useUserContext';
 
 export default function NavMenu() {
+
+    const { user } = useUserContext();
 
     return (
         <div className={styles.menu}>
@@ -23,13 +20,13 @@ export default function NavMenu() {
                     </span>
                 </div>
                 <p className={styles.menu__name}>
-                    Арина Миллер
+                    {user ? user.username : 'Loading...'}
                 </p>
                 <p className={styles.menu__email}>
-                    taisia.lihoscherst@yandex.ru
+                    {user ? user.email : 'Loading...'}
                 </p>
                 <p className={styles.menu__id}>
-                    ID: 111111111111
+                    ID: {user ? user.id : 0 }
                 </p>
                 <Link to='/cabinet/main' className={styles.menu__link}>
                     <span className={styles.menu__icon}>

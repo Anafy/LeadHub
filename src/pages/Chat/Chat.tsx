@@ -18,6 +18,8 @@ export default function Chat({ai, title} : ChatProps) {
 
     const [data, setData] = useState<ChatMessage[] | null>(null)
 
+    const [message, setMessage] = useState<string>('')
+
     const updateMessage = async () => {
         if (user !== null) {
             await apiFetch(`/messages/${ai}`, 'GET', null, 'cabinet', enqueueSnackbar, navigate).then((res) => {
@@ -30,7 +32,20 @@ export default function Chat({ai, title} : ChatProps) {
 
     useEffect(() => {
         updateMessage();
-    }, []);
+    }, [user]);
+
+    const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        if (user !== null) {
+            const messageState = message
+            setMessage('')
+            await apiFetch(`/generator/${ai}`, 'POST', {
+                user_message: messageState
+            }, 'cabinet', enqueueSnackbar, navigate).then((res) => {
+                setData(res.messages)
+            })
+        }
+    }
 
     return (
         <div className={styles.chat}>
@@ -58,8 +73,8 @@ export default function Chat({ai, title} : ChatProps) {
                             <ChatMessage key={index} message={item} title={title} type={ai} />
                         ))}
                     </ul>
-                    <form action="" className={styles.chat__form}>
-                        <input className={styles.chat__input} type="text" name="text" placeholder="Отправьте сообщение" autoComplete="off"/>
+                    <form action="" className={styles.chat__form} onSubmit={sendMessage}>
+                        <input className={styles.chat__input} type="text" name="text" placeholder="Отправьте сообщение" autoComplete="off" value={message} onChange={(e) => setMessage(e.target.value)} />
                         <button type="submit" className={styles.chat__submit}>
                             <Send className={styles.chat__submit_svg}/>
                         </button>

@@ -13,6 +13,7 @@ type ChatMessageContent = string | Array<string>;
 
 interface ChatMessage {
     role: string,
+    created: Date,
     content: ChatMessageContent
 }
 
