@@ -7,8 +7,9 @@ import styles from './Cabinet.module.sass'
 import Chat from "../../pages/Chat/Chat";
 import { useSnackbar } from "notistack";
 import apiFetch from "../../config/api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
+import { LoaderContext } from "../../context/LoaderContext";
 
 
 export default function Cabinet() {
@@ -17,11 +18,13 @@ export default function Cabinet() {
 
     const { enqueueSnackbar } = useSnackbar();
 
+    const { showLoading, hideLoading } = useContext(LoaderContext);
+
     const navigate = useNavigate()
 
     const updateUser = async () => {
         if (user === null) {
-            await apiFetch('/user', 'GET', null, 'cabinet', enqueueSnackbar, navigate).then((res) => {
+            await apiFetch('/user', 'GET', null, 'cabinet', enqueueSnackbar, navigate, showLoading, hideLoading).then((res) => {
                 console.log(res);
                 if (res.status === true) {
                     setUser(res.user_data);

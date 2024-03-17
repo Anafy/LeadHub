@@ -1,13 +1,22 @@
 import { OptionsObject } from 'notistack';
 
+let activeRequests = 0;
+
 export default async function apiFetch(
     url: string, 
     method: string, 
     body: Record<string, unknown> | null = null, 
     type: 'cabinet' | null,
     enqueueSnackbar: (msg: string, options?: OptionsObject) => void,
-    navigate: (path: string) => void
+    navigate: (path: string) => void,
+    showLoading: () => void,
+    hideLoading: () => void
 ) {
+
+    activeRequests++;
+    if (activeRequests === 1) {
+        showLoading();
+    }
 
     const options: RequestInit = {
         method,
@@ -53,5 +62,10 @@ export default async function apiFetch(
             enqueueSnackbar('An unknown error occurred', { variant: 'error' });
         }
         throw error;
+    } finally {
+        activeRequests--;
+        if (activeRequests === 0) {
+            hideLoading();
+        }
     }
 }

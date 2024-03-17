@@ -6,6 +6,9 @@ import Auth from "./pages/Auth/Auth.tsx"
 import Cabinet from './components/Cabinet/Cabinet.tsx';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import { SnackbarContext } from './context/SnackbarContext.tsx';
+import Loader from './components/Loader/Loader.tsx';
+
+import { LoaderProvider } from './context/LoaderContext';
 
 function App() {
 
@@ -14,15 +17,18 @@ function App() {
   return (
     <SnackbarProvider maxSnack={3} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
       <SnackbarContext.Provider value={snackbar}>
-        <Router>
-          <Routes>
-            <Route path='/start' element={<Start/>} />
-            <Route path='/activate' element={<Activate/>} />
-            <Route path='/auth' element={<Auth/>} />
-            <Route path='/cabinet/*' element={<Cabinet/>} />
-            <Route path='*' element={<Navigate to={`/start`} replace />} />
-          </Routes>
-        </Router>
+        <LoaderProvider>
+          <Loader/>
+          <Router>
+            <Routes>
+              <Route path='/start' element={<Start/>} />
+              <Route path='/activate' element={<Activate/>} />
+              <Route path='/auth' element={<Auth/>} />
+              <Route path='/cabinet/*' element={<Cabinet/>} />
+              <Route path='*' element={<Navigate to={`/start`} replace />} />
+            </Routes>
+          </Router>
+        </LoaderProvider>
       </SnackbarContext.Provider>
     </SnackbarProvider>
   )

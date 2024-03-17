@@ -1,6 +1,6 @@
 import styles from './Auth.module.sass'
 import { Formik, Field, Form} from "formik"
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import * as Yup from "yup"
 
@@ -9,6 +9,7 @@ import apiFetch from '../../config/api';
 
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
+import { LoaderContext } from '../../context/LoaderContext';
 
 export default function Auth() {
 
@@ -24,13 +25,15 @@ export default function Auth() {
             .required("Required"),
     })
 
+    const { showLoading, hideLoading } = useContext(LoaderContext);
+
     const submitForm = async (values: {key: string}) => {
         try {
             console.log('Form submitted with values:', values);
             await apiFetch('/auth/login', 'POST', {
                 auth_token: values.key,
                 remember: isChecked
-            }, null, enqueueSnackbar, navigate).then((res) => {
+            }, null, enqueueSnackbar, navigate, showLoading, hideLoading).then((res) => {
                 if (res.status === true) {
                     navigate('/cabinet')
                 }

@@ -4,11 +4,12 @@ import styles from "./Chat.module.sass"
 
 import chatgpt from "../../assets/imgs/chatgpt.png"
 import ChatMessage from "./ChatMessage"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { enqueueSnackbar } from "notistack"
 import { useNavigate } from "react-router-dom"
 import apiFetch from "../../config/api"
 import { useUserContext } from "../../context/useUserContext"
+import { LoaderContext } from "../../context/LoaderContext"
 
 export default function Chat({ai, title} : ChatProps) {
 
@@ -20,9 +21,11 @@ export default function Chat({ai, title} : ChatProps) {
 
     const [message, setMessage] = useState<string>('')
 
+    const { showLoading, hideLoading } = useContext(LoaderContext);
+
     const updateMessage = async () => {
         if (user !== null) {
-            await apiFetch(`/messages/${ai}`, 'GET', null, 'cabinet', enqueueSnackbar, navigate).then((res) => {
+            await apiFetch(`/messages/${ai}`, 'GET', null, 'cabinet', enqueueSnackbar, navigate, showLoading, hideLoading).then((res) => {
                 console.log(res);
                 setData(res.messages)
             });
@@ -41,7 +44,7 @@ export default function Chat({ai, title} : ChatProps) {
             setMessage('')
             await apiFetch(`/generator/${ai}`, 'POST', {
                 user_message: messageState
-            }, 'cabinet', enqueueSnackbar, navigate).then((res) => {
+            }, 'cabinet', enqueueSnackbar, navigate, showLoading, hideLoading).then((res) => {
                 setData(res.messages)
             })
         }
