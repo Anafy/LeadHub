@@ -3,3 +3,26 @@
     align-items: stretch
     justify-content: flex-start
     width: 100%
+    background-color: #F5FAFF
+    position: relative
+    z-index: 1
+    &::before
+        content: ''
+        position: absolute
+        top: -100px
+        right: 0px
+        width: 50%
+        height: 100%
+        background-size: cover
+        background-position: center
+        background-image: url('../../assets/imgs/main-top.png')
+    &::after
+        content: ''
+        position: absolute
+        bottom: -196px
+        left: 361px
+        width: 50%
+        height: 100%
+        background-size: cover
+        background-position: center
+        background-image: url('../../assets/imgs/main-bottom.png')

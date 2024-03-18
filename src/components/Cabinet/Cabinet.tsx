@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import Main from "../../pages/Main/Main";
+import Marathon from "../../pages/Marathon/Marathon";
 import Choose from "../../pages/Ai/Ai";
 import NavMenu from "../NavMenu/NavMenu";
 
@@ -44,6 +45,7 @@ export default function Cabinet() {
                 <NavMenu/>
                 <Routes>
                     <Route path='/main' element={<Main/>} />
+                    <Route path='/marathon' element={<Marathon/>} />
                     <Route path='/ai' element={<Choose/>} />
                     <Route path='/ai/chatgpt' element={<Chat ai={'gpt'} title={'ChatGPT'} />} />
                     <Route path='/ai/dalle' element={ <Chat ai={'dalle'} title={'DALL-E'} /> } />
