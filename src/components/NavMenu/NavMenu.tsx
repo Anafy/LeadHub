@@ -52,7 +52,7 @@ export default function NavMenu() {
                     </span>
                     Профиль
                 </Link>
-                <Link to='/cabinet/support' className={styles.menu__link}>
+                <Link to='/cabinet/faq' className={styles.menu__link}>
                     <span className={styles.menu__icon}>
                         ⚙️
                     </span>
