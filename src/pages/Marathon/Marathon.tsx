@@ -102,7 +102,7 @@ export default function Marathon() {
                         </div>
                     </div>
                     <ul className={styles.marathon__list}>
-                        {data != null && data.mainPrizes.map((item, i) => (
+                        {data != null && data.formatted_main_prizes.map((item, i) => (
                             <button 
                                 key={i} 
                                 className={styles.marathon__item}

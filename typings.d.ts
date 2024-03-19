@@ -39,13 +39,12 @@ interface MarathonDataMainPrizes {
 
 interface MarathonDataAltPrizes {
     id: number,
-    name: string,
-    urls: string
+    name: string
 }
 
 interface MarathonData {
     status: true | false,
     ends: Date,
-    mainPrizes: MarathonDataMainPrizes[],
-    altPrizes: MarathonDataAltPrizes[]
+    formatted_main_prizes: MarathonDataMainPrizes[],
+    formatted_alt_prizes: MarathonDataAltPrizes[]
 }

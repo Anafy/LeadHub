@@ -19,7 +19,6 @@ export default function Modal({ openModal, setOpenModal, setShowHiddenBlock }: M
         if (!open) {
             const timer = setTimeout(() => {
                 setOpenModal(false)
-                setShowHiddenBlock(true)
             }, 300)
             return () => clearTimeout(timer)
         }
