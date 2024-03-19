@@ -1,67 +1,63 @@
-import { useState, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './Marathon.module.sass';
 import Modal from '../../components/Modal/Modal';
+import { useUserContext } from '../../context/useUserContext';
+import apiFetch from '../../config/api';
+import { LoaderContext } from '../../context/LoaderContext';
+import { enqueueSnackbar } from 'notistack';
+import { useNavigate } from 'react-router-dom';
 
 export default function Marathon() {
 
     const [openModal, setOpenModal] = useState(false)
-    const [newModalCode, setNewModalCode] = useState(true)
     const [showHiddenBlock, setShowHiddenBlock] = useState(false)
-    const [selectedItem, setSelectedItem] = useState(null)
-    const [btnBrightness, setBtnBrightness] = useState(0.75)
-    const [days, setDays] = useState(3);
-    const [hours, setHours] = useState(23);
-    const [minutes, setMinutes] = useState(45);
+    const [selectedItem, setSelectedItem] = useState<number | null>(null)
+    const [data, setData] = useState<MarathonData | null>(null)
 
-    const data = [
-        { 
-            image: '/assets/imgs/marathon-image1.png',
-            text: 'iPhone 15 PRO'
-        },
-        { 
-            image: '../../assets/imgs/marathon-image2.png',
-            text: 'Сертификат WB на 5000₽'
-        },
-        { 
-            image: '../../assets/imgs/marathon-image3.png',
-            text: 'Сертификат OZON на 5000₽'
-        },
-        { 
-            image: '../../assets/imgs/marathon-image4.png',
-            text: 'Купоны такси на 5 поездок'
-        },
-        { 
-            image: '../../assets/imgs/marathon-image5.png',
-            text: '3000₽ на карту'
-        },
-        { 
-            image: '../../assets/imgs/marathon-image6.png',
-            text: 'Telegram Premium на 6 мес.'
+    const { user } = useUserContext()
+
+    const navigate = useNavigate()
+
+    const { showLoading, hideLoading } = useContext(LoaderContext);
+
+    const updateMarathon = async () => {
+        if (user !== null) {
+            await apiFetch(`/giveaway`, 'GET', null, 'cabinet', enqueueSnackbar, navigate, showLoading, hideLoading).then((res) => {
+                console.log(res);
+                setData(res)
+            });
         }
-    ]
+        return null;
+    }
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            if (minutes > 0) {
-                setMinutes(minutes - 1);
-            } else {
-                if (hours > 0) {
-                    setHours(hours - 1);
-                    setMinutes(59)
-                } else {
-                    if (days > 0) {
-                        setDays(days - 1)
-                        setHours(23)
-                        setMinutes(59)
-                    } else {
-                        clearInterval(timer)
-                    }
-                }
-            }
-        }, 60000)
+        updateMarathon();
+    }, [user]);
 
-        return () => clearInterval(timer)
-    }, [days, hours, minutes]);
+    const [timeLeft, setTimeLeft] = useState<{days: number, hours: number, minutes: number}>({days: 0, hours: 0, minutes: 0});
+
+    useEffect(() => {
+        if (data?.ends) {
+            const countdown = setInterval(() => {
+                const now = new Date();
+                const ends = new Date(data.ends);
+                const diff = ends.getTime() - now.getTime();
+
+                if (diff < 0) {
+                    clearInterval(countdown);
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / 1000 / 60) % 60);
+
+                setTimeLeft({days, hours, minutes});
+            }, 1000);
+
+            return () => clearInterval(countdown);
+        }
+    }, [data]);
 
     return (
         <>
@@ -76,7 +72,7 @@ export default function Marathon() {
                     <div className={styles.marathon__timer}>
                         <div className={styles.marathon__time}>
                             <p className={styles.marathon__count}>
-                                {days < 10 ? `0${days}` : days}
+                                {timeLeft.days.toString().padStart(2, '0')}
                             </p>
                             <p className={styles.marathon__date}>
                                 дня
@@ -87,7 +83,7 @@ export default function Marathon() {
                         </p>
                         <div className={styles.marathon__time}>
                             <p className={styles.marathon__count}>
-                                {hours < 10 ? `0${hours}` : hours}
+                                {timeLeft.hours.toString().padStart(2, '0')}
                             </p>
                             <p className={styles.marathon__date}>
                                 часа
@@ -98,7 +94,7 @@ export default function Marathon() {
                         </p>
                         <div className={styles.marathon__time}>
                             <p className={styles.marathon__count}>
-                                {minutes < 10 ? `0${minutes}` : minutes}
+                                {timeLeft.minutes.toString().padStart(2, '0')}
                             </p>
                             <p className={styles.marathon__date}>
                                 минут
@@ -106,13 +102,13 @@ export default function Marathon() {
                         </div>
                     </div>
                     <ul className={styles.marathon__list}>
-                        {data.map((item, i) => (
+                        {data != null && data.mainPrizes.map((item, i) => (
                             <button 
                                 key={i} 
-                                className={selectedItem === i ? styles.marathon__itemSelected : styles.marathon__item} 
+                                className={styles.marathon__item}
+                                data-active={selectedItem === i ? 'true' : 'false'}
                                 onClick={() => {
                                     setSelectedItem(i)
-                                    setBtnBrightness(1)
                                 }}
                             >
                                 <div className={styles.marathon__img}>
@@ -123,7 +119,7 @@ export default function Marathon() {
                                         🎁
                                     </p>
                                     <p className={styles.marathon__right}>
-                                        {item.text}
+                                        {item.name}
                                     </p>
                                 </div>
                             </button>
@@ -132,26 +128,25 @@ export default function Marathon() {
                     <button 
                         type="button" 
                         className={styles.marathon__btn} 
-                        style={{ filter: `brightness(${btnBrightness})` }} 
                         disabled={selectedItem === null}
                         onClick={() => {
-                            setNewModalCode(false)
                             setOpenModal(true)
-                            setBtnBrightness(0.75)
                         }}
                     >
                         Участвовать
                     </button>
-                    <div className={showHiddenBlock ? styles.marathon__hidden : styles.marathon__hidden + ' ' + styles.hidden}>
-                        <p className={styles.marathon__hidden_text}>
-                            Результаты розыгрыша и дополнительные подарки от партнеров в нашем telegram-канале 👇
-                        </p>
-                        <button className={styles.marathon__hidden_btn}>
-                            Telegram-канал "Марафон призов"
-                        </button>
-                    </div>
+                    {showHiddenBlock && (
+                        <div className={styles.marathon__hidden}>
+                            <p className={styles.marathon__hidden_text}>
+                                Результаты розыгрыша и дополнительные подарки от партнеров в нашем telegram-канале 👇
+                            </p>
+                            <button className={styles.marathon__hidden_btn}>
+                                Telegram-канал "Марафон призов"
+                            </button>
+                        </div>
+                    )}
                 </div>
-                <Modal openModal={openModal} setOpenModal={setOpenModal} newModalCode={newModalCode} setShowHiddenBlock={setShowHiddenBlock} />
+                <Modal openModal={openModal} setOpenModal={setOpenModal} setShowHiddenBlock={setShowHiddenBlock} />
             </div>
         </>
     );

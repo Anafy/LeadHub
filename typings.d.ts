@@ -9,7 +9,7 @@ interface ChatProps {
     title: string
 }
 
-type ChatMessageContent = string | Array<string>;
+type ChatMessageContent = string;
 
 interface ChatMessage {
     role: string,
@@ -29,4 +29,23 @@ interface UserContextProps {
     user: User | null;
     setUser: React.Dispatch<React.SetStateAction<User | null>>;
     updateUser: () => Promise<null>;
+}
+
+interface MarathonDataMainPrizes {
+    id: number,
+    name: string,
+    image: string
+}
+
+interface MarathonDataAltPrizes {
+    id: number,
+    name: string,
+    urls: string
+}
+
+interface MarathonData {
+    status: true | false,
+    ends: Date,
+    mainPrizes: MarathonDataMainPrizes[],
+    altPrizes: MarathonDataAltPrizes[]
 }
