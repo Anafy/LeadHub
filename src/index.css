@@ -109,3 +109,7 @@ input {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+#paywidget-loader-overlay {
+  background-color: #00000080 !important;
+}

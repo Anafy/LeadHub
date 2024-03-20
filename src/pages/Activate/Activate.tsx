@@ -9,9 +9,25 @@ import CheckmarkSvg from "../../assets/imgs/checkbox.svg?react"
 import Visa from "../../assets/imgs/visa.svg?react"
 import Applepay from "../../assets/imgs/applepay.svg?react"
 import Mastercard from "../../assets/imgs/mastercard.svg?react"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+declare global {
+    interface Window { pay: () => void }
+}
 
 export default function Activate() {
+
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = "https://widget.payselection.com/lib/pay-widget.js";
+        script.type = 'text/javascript';
+        document.body.appendChild(script);
+
+        // Удалить скрипт при размонтировании компонента
+        return () => {
+            document.body.removeChild(script);
+        }
+    }, []);
 
     const EmailFormSchema = Yup.object().shape({
         email: Yup.string()
@@ -21,11 +37,87 @@ export default function Activate() {
 
     const submitForm = async (values: {email: string}) => {
         try {
-          console.log('Form submitted with values:', values);
-          return null;
+            console.log('Form submitted with values:', values);
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+
+            let clickId = localStorage.getItem('click_id');
+            if (!clickId || clickId === '') {
+                clickId = '11111111';
+            }
+
+            const generateRandomString = (length: number) => {
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let result = '';
+                for (let i = 0; i < length; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                return result;
+            };
+
+            const orderId = generateRandomString(15);
+
+            script.innerHTML = `
+                this.pay = function() {
+                    var widget = new pw.PayWidget();
+                    widget.pay(
+                        {
+                            serviceId: '22667',
+                            key: '04749a7b873cc6d71864d6f7d4527b32bd5aacdaf5e57960c49d333115f80c07d784c932fc8229b3a9fee61e13f20c8501fbc9162c14dabb94edee9349fdc2e2d2',
+                            logger: true,
+                        },
+                        {
+                            MetaData: {
+                                PaymentType: 'Pay',
+                            },
+                            PaymentRequest: {
+                                OrderId: '${orderId}',
+                                Amount: '1',
+                                Currency: 'RUB',
+                                Description: 'Оплата',
+                                RebillFlag: true,
+                                ExtraData: {
+                                    WebhookUrl: 'https://payments.chat-guru.ru/',
+                                    click_id: '${clickId}',
+                                    offer_name: 'chatguru',
+                                },
+                            },
+                            CustomerInfo: {
+                                Email: '${values.email}',
+                                ReceiptEmail: '${values.email}',
+                            },
+                        },
+                        {
+                            onSuccess: function (res) {
+                                console.log('onSuccess from shop', res)
+                            },
+                            onError: function (res) {
+                                console.log('onFail from shop', res)
+                            },
+                            onClose: function (res) {
+                                console.log('onClose from shop', res)
+                            },
+                        },
+                        {
+                            only2Level: true,
+                        }
+                    )      
+                };
+            `;
+            document.body.appendChild(script);
+
+            // Вызов функции pay
+            if (window.pay) {
+                window.pay();
+            } else {
+                console.error('Pay function is not defined');
+            }
+
+            return null;
         } catch (error) {
-          console.error('Error submitting form:', error);
-          return 'error.submitting.form';
+            console.error('Error submitting form:', error);
+            return 'error.submitting.form';
         }
     };
 

@@ -1,17 +1,27 @@
 import styles from './Start.module.sass'
 
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Icon from "../../assets/imgs/click.svg?react"
+import { useEffect } from 'react';
 
 export default function Start() {
+
+    const location = useLocation();
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        let clickId = params.get('click_id') || '11111111';
+        if (!clickId || clickId === '') {
+            clickId = '11111111';
+        }
+        localStorage.setItem('click_id', clickId);
+    }, [location]);
 
     return (
         <>
             <div className={styles.start}>
                 <div className={styles.start__container}>
-                    <div className={styles.start__block}>
-
-                    </div>
+                    <div className={styles.start__block}/>
                     <p className={styles.start__title}>
                         Марафон призов от ChatGuru
                     </p>
