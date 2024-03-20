@@ -27,7 +27,6 @@ export default function Cabinet() {
 
     const updateUser = async () => {
         await apiFetch('/user', 'GET', null, 'cabinet', enqueueSnackbar, navigate, showLoading, hideLoading).then((res) => {
-            console.log(res);
             if (res.status === true) {
                 setUser(res.user_data);
             }

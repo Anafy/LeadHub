@@ -29,7 +29,6 @@ export default function Auth() {
 
     const submitForm = async (values: {key: string}) => {
         try {
-            console.log('Form submitted with values:', values);
             await apiFetch('/auth/login', 'POST', {
                 auth_token: values.key,
                 remember: isChecked
@@ -40,7 +39,6 @@ export default function Auth() {
             })
             return null
         } catch (error) {
-          console.error('Error submitting form:', error);
           return 'error.submitting.form';
         }
     };
