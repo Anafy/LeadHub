@@ -6,8 +6,6 @@ import { LoaderContext } from '../../context/LoaderContext';
 export default function Loader() {
     const { isLoading } = useContext(LoaderContext);
 
-    console.log(isLoading)
-
     if (!isLoading) {
         return null;
     }

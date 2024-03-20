@@ -1,5 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './ModalFreeze.module.sass';
+import apiFetch from '../../config/api';
+import { enqueueSnackbar } from 'notistack';
+import { useNavigate } from 'react-router-dom';
+import { LoaderContext } from '../../context/LoaderContext';
+import { useUserContext } from '../../context/useUserContext';
 
 interface ModalProps {
     openModal: boolean
@@ -9,6 +14,12 @@ interface ModalProps {
 export default function Modal({ openModal, setOpenModal }: ModalProps) {
 
     const [open, setOpen] = useState(false)
+
+    const navigate = useNavigate()
+
+    const { updateUser, user } = useUserContext();
+
+    const { showLoading, hideLoading } = useContext(LoaderContext);
 
     useEffect(() => {
         setOpen(openModal)
@@ -27,6 +38,21 @@ export default function Modal({ openModal, setOpenModal }: ModalProps) {
         setOpen(false)
         setOpenModal(false)
     };
+
+    const subscriptionFetch = async () => {
+        if (user != null) {
+            await apiFetch(`/subscription`, 'POST', {
+                action: user.subscription === 'available' ? 'freeze' : 'cancel'
+            }, 'cabinet', enqueueSnackbar, navigate, showLoading, hideLoading).then(async (res) => {
+                if (res.status === true) {
+                    await updateUser()
+                    handleContinue()
+                }
+            })
+        } else {
+            navigate('/auth')
+        }
+    }
 
     if (!openModal) return null;
 
@@ -48,7 +74,7 @@ export default function Modal({ openModal, setOpenModal }: ModalProps) {
                     <button className={styles.modal__btn} onClick={handleContinue}>
                         Нет
                     </button>
-                    <button className={styles.modal__btn} onClick={handleContinue}>
+                    <button className={styles.modal__btn} onClick={subscriptionFetch}>
                         Да
                     </button>
                 </div>

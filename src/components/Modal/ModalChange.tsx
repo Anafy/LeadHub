@@ -30,7 +30,7 @@ export default function Modal({ openModal, setOpenModal }: ModalProps) {
     };
 
     const handleOutsideClick = (event: MouseEvent) => {
-        if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        if (modalRef.current && (modalRef.current as HTMLElement).contains(event.target as Node)) {
             setOpen(false)
             setOpenModal(false)
         }

@@ -26,14 +26,12 @@ export default function Cabinet() {
     const navigate = useNavigate()
 
     const updateUser = async () => {
-        if (user === null) {
-            await apiFetch('/user', 'GET', null, 'cabinet', enqueueSnackbar, navigate, showLoading, hideLoading).then((res) => {
-                console.log(res);
-                if (res.status === true) {
-                    setUser(res.user_data);
-                }
-            });
-        }
+        await apiFetch('/user', 'GET', null, 'cabinet', enqueueSnackbar, navigate, showLoading, hideLoading).then((res) => {
+            console.log(res);
+            if (res.status === true) {
+                setUser(res.user_data);
+            }
+        });
         return null;
     }
 
