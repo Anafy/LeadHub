@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styles from './ModalChange.module.sass';
 
 interface ModalProps {
@@ -9,6 +9,7 @@ interface ModalProps {
 export default function Modal({ openModal, setOpenModal }: ModalProps) {
 
     const [open, setOpen] = useState(false)
+    const modalRef = useRef(null)
 
     useEffect(() => {
         setOpen(openModal)
@@ -18,24 +19,43 @@ export default function Modal({ openModal, setOpenModal }: ModalProps) {
         if (!open) {
             const timer = setTimeout(() => {
                 setOpenModal(false)
-            }, 300)
+            }, 300);
             return () => clearTimeout(timer)
         }
-    }, [open, setOpenModal]);
+    }, [open, setOpenModal])
 
     const handleContinue = () => {
         setOpen(false)
         setOpenModal(false)
     };
 
-    if (!openModal) return null;
+    const handleOutsideClick = (event: MouseEvent) => {
+        if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+            setOpen(false)
+            setOpenModal(false)
+        }
+    };
+
+    useEffect(() => {
+        if (open) {
+            document.addEventListener('click', handleOutsideClick)
+        } else {
+            document.removeEventListener('click', handleOutsideClick)
+        }
+        return () => {
+            document.removeEventListener('click', handleOutsideClick)
+        };
+    }, [open]);
+
+    if (!openModal) return null
 
     return (
         <div className={styles.modal} style={{ opacity: open ? 1 : 0 }}>
             <div
+                ref={modalRef}
                 className={styles.modal__container}
                 onClick={(e) => {
-                    e.stopPropagation();
+                    e.stopPropagation()
                 }}
             >
                 <p className={styles.modal__top}>
@@ -48,12 +68,7 @@ export default function Modal({ openModal, setOpenModal }: ModalProps) {
                     Введите Ваш старый токен
                 </p>
                 <form action="" className={styles.modal__form}>
-                    <input 
-                        type="text" 
-                        name="key" 
-                        className={styles.modal__input} 
-                        autoComplete="off"
-                    />
+                    <input type="text" name="key" className={styles.modal__input} autoComplete="off" />
                 </form>
                 <p className={styles.modal__token}>
                     Новый токен

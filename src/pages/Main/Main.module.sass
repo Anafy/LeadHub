@@ -5,29 +5,29 @@
     display: flex
     align-items: center
     justify-content: center
-    margin: 265px auto
+    // margin: 265px auto
     position: relative
     z-index: 10
-    // &::before
-    //     content: ''
-    //     position: absolute
-    //     bottom: 0
-    //     left: 0
-    //     width: 100%
-    //     height: 100%
-    //     background-size: cover
-    //     background-position: center
-    //     background-image: url('../../assets/imgs/main-top.png')
-    // &::after
-    //     content: ''
-    //     position: absolute
-    //     top: 0
-    //     left: 0
-    //     width: 100%
-    //     height: 100%
-    //     background-size: cover
-    //     background-position: center
-    //     background-image: url('../../assets/imgs/main-bottom.png')
+    &::before
+        content: ''
+        position: absolute
+        top: -100px
+        right: 0px
+        width: 50%
+        height: 100%
+        background-size: cover
+        background-position: center
+        background-image: url('../../assets/imgs/main-top.png')
+    &::after
+        content: ''
+        position: absolute
+        bottom: -196px
+        left: 0
+        width: 50%
+        height: 100%
+        background-size: cover
+        background-position: center
+        background-image: url('../../assets/imgs/main-bottom.png')
     &__container
         max-width: 771px
         width: 100%
