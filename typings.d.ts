@@ -34,7 +34,8 @@ interface UserContextProps {
 interface MarathonDataMainPrizes {
     id: number,
     name: string,
-    image: string
+    image: string,
+    is_selected: boolean
 }
 
 interface MarathonDataAltPrizes {

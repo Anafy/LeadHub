@@ -25,6 +25,11 @@ export default function Marathon() {
             await apiFetch(`/giveaway`, 'GET', null, 'cabinet', enqueueSnackbar, navigate, showLoading, hideLoading).then((res) => {
                 console.log(res);
                 setData(res)
+                const selectedIndex = res.formatted_main_prizes.findIndex((item: MarathonDataMainPrizes) => item.is_selected === true);
+                if (selectedIndex !== -1) {
+                    setShowHiddenBlock(true);
+                    setSelectedItem(res.formatted_main_prizes[selectedIndex].id);
+                }
             });
         }
         return null;
@@ -38,13 +43,12 @@ export default function Marathon() {
 
     useEffect(() => {
         if (data?.ends) {
-            const countdown = setInterval(() => {
+            const updateCountdown = () => {
                 const now = new Date();
                 const ends = new Date(data.ends);
                 const diff = ends.getTime() - now.getTime();
 
                 if (diff < 0) {
-                    clearInterval(countdown);
                     return;
                 }
 
@@ -53,11 +57,30 @@ export default function Marathon() {
                 const minutes = Math.floor((diff / 1000 / 60) % 60);
 
                 setTimeLeft({days, hours, minutes});
-            }, 1000);
+            };
+
+            // Обновить сразу при запуске
+            updateCountdown();
+
+            // Затем обновлять каждую секунду
+            const countdown = setInterval(updateCountdown, 1000);
 
             return () => clearInterval(countdown);
         }
     }, [data]);
+
+    const selectFetch = async () => {
+        await apiFetch(`/giveaway/select_prize`, 'POST', {
+            prize_id: selectedItem
+        }, 'cabinet', enqueueSnackbar, navigate, showLoading, hideLoading).then((res) => {
+            console.log(res)
+            if (res.status === true) {
+                setOpenModal(true)
+                setShowHiddenBlock(true)
+            }
+            return null
+        })
+    }
 
     return (
         <>
@@ -106,9 +129,12 @@ export default function Marathon() {
                             <button 
                                 key={i} 
                                 className={styles.marathon__item}
-                                data-active={selectedItem === i ? 'true' : 'false'}
+                                data-active={selectedItem === item.id ? 'true' : 'false'}
                                 onClick={() => {
-                                    setSelectedItem(i)
+                                    !showHiddenBlock && setSelectedItem(item.id)
+                                }}
+                                style={{
+                                    filter: showHiddenBlock && selectedItem !== item.id ? 'grayscale(80%)' : 'none'
                                 }}
                             >
                                 <div className={styles.marathon__img}>
@@ -125,16 +151,16 @@ export default function Marathon() {
                             </button>
                         ))}
                     </ul>
-                    <button 
-                        type="button" 
-                        className={styles.marathon__btn} 
-                        disabled={selectedItem === null}
-                        onClick={() => {
-                            setOpenModal(true)
-                        }}
-                    >
-                        Участвовать
-                    </button>
+                    {!showHiddenBlock && (
+                        <button 
+                            type="button" 
+                            className={styles.marathon__btn} 
+                            disabled={selectedItem === null}
+                            onClick={selectFetch}
+                        >
+                            Участвовать
+                        </button>
+                    )}
                     {showHiddenBlock && (
                         <div className={styles.marathon__hidden}>
                             <p className={styles.marathon__hidden_text}>

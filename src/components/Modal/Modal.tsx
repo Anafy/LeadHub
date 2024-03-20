@@ -4,7 +4,7 @@ import styles from './Modal.module.sass';
 interface ModalProps {
     openModal: boolean
     setOpenModal: (open: boolean) => void
-    setShowHiddenBlock: (show: boolean) => void
+    setShowHiddenBlock: (show: boolean) => void,
 }
 
 export default function Modal({ openModal, setOpenModal, setShowHiddenBlock }: ModalProps) {
@@ -24,10 +24,8 @@ export default function Modal({ openModal, setOpenModal, setShowHiddenBlock }: M
         }
     }, [open, setOpenModal, setShowHiddenBlock]);
 
-    const handleContinue = () => {
+    const handleContinue = async () => {
         setOpen(false)
-        setOpenModal(false)
-        setShowHiddenBlock(true)
     };
 
     if (!openModal) return null;
