@@ -176,6 +176,9 @@ export default function Activate() {
                                         Я согласен с <a href='' target='_blank' rel='noreferrer noopenner'  className={styles.activate__alert_underline}> условиями пользовательского соглашения и правилами платформы ChatGuru</a>
                                     </p>
                                 </div>
+                                <p className={styles.activate__alerts}>
+                                        Нажимая кнопку "Оплатить", вы соглашаетесь с планом списания продукта. *Первые 7 дней – 1₽, далее 790₽ раз в 7 дней согласно системе списания. Отмена — в любой момент.
+                                    </p>
                                 <button type="submit" disabled={isSubmitting} className={styles.activate__btn}>
                                     Оплатить 1₽
                                 </button>

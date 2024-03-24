@@ -95,13 +95,19 @@
         line-height: 1
         color: #AAAAAA
         text-align: left
-        margin-bottom: 50px
+        margin-bottom: 20px
         &_underline
             display: inline
             font-size: 1em
             line-height: 1
             color: #AAAAAA
             text-decoration: underline
+    &__alerts
+        font-size: 0.75em
+        line-height: 1
+        color: #AAAAAA
+        text-align: left
+        margin-bottom: 50px
     &__checkbox 
         display: inline-block
         position: relative
@@ -134,4 +140,66 @@
             height: auto
             opacity: 0
             transition: opacity .15s ease-in-out
+    @media only screen and ( max-width: 959px )
+        max-width: 295px
+        &__link
+            font-size: 0.625em
+            margin-top: 12px
+            margin-right: 12px
+        &__circle
+            padding: 3px 4px 4px
+        &__descr
+            font-size: 0.875em
+        &__alert
+            font-size: 0.625em
+            margin-bottom: 15px
+        &__alerts
+            font-size: 0.625em
+            margin-bottom: 30px
+        &__btn
+            margin-bottom: 30px
+        &__form
+            padding: 0 12px
+            box-sizing: border-box
+        &__container
+            padding-bottom: 12px
+            max-width: none
+    @media only screen and ( max-width: 639px )
+        max-width: none
+        margin: 0
+        height: unset
+        justify-content: flex-start
+        &__container
+            padding: 0 50px
+        &__link
+            margin-top: 20px
+            margin-right: 20px
+            margin-bottom: 133px
+        &__circle
+            margin-bottom: 16px
+        &__descr
+            margin-bottom: 60px
+        &__alert
+            margin-bottom: 15px
+        &__alerts
+            margin-bottom: 90px
+        &__btn
+            margin-bottom: 50px
+    @media only screen and ( max-width: 479px )
+        &__container
+            padding: 0 20px
+        &__title
+            font-size: 1.25em
+        &__descr
+            font-size: 0.875em
+            margin-bottom: 50px
+        &__alert
+            margin-bottom: 15px
+        &__alerts
+            margin-bottom: 60px
+        &__btn
+            margin-bottom: 60px
+
+
+        
         

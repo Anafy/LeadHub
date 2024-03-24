@@ -5,54 +5,50 @@ import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 import { LoaderContext } from '../../context/LoaderContext';
 import { useUserContext } from '../../context/useUserContext';
+import Close from "../../assets/imgs/close.svg?react";
 
 interface ModalProps {
-    openModal: boolean
-    setOpenModal: (open: boolean) => void
+    openModal: boolean;
+    setOpenModal: (open: boolean) => void;
 }
 
 export default function Modal({ openModal, setOpenModal }: ModalProps) {
-
     const [open, setOpen] = useState(false)
+    const [isFrozen, setIsFrozen] = useState(false)
 
     const navigate = useNavigate()
-
-    const { updateUser, user } = useUserContext();
-
-    const { showLoading, hideLoading } = useContext(LoaderContext);
+    const { updateUser, user } = useUserContext()
+    const { showLoading, hideLoading } = useContext(LoaderContext)
 
     useEffect(() => {
-        setOpen(openModal)
-    }, [openModal])
+        setOpen(openModal);
+    }, [openModal]);
 
     useEffect(() => {
         if (!open) {
             const timer = setTimeout(() => {
-                setOpenModal(false)
-            }, 300)
-            return () => clearTimeout(timer)
+                setOpenModal(false);
+            }, 300);
+            return () => clearTimeout(timer);
         }
     }, [open, setOpenModal]);
 
-    const handleContinue = () => {
-        setOpen(false)
-        setOpenModal(false)
-    };
-
-    const subscriptionFetch = async () => {
+    const handleContinue = async () => {
+        setOpen(false);
+        setOpenModal(false);
         if (user != null) {
             await apiFetch(`/subscription`, 'POST', {
                 action: user.subscription === 'available' ? 'freeze' : 'cancel'
             }, 'cabinet', enqueueSnackbar, navigate, showLoading, hideLoading).then(async (res) => {
                 if (res.status === true) {
+                    setIsFrozen(true)
                     await updateUser()
-                    handleContinue()
                 }
-            })
+            });
         } else {
-            navigate('/auth')
+            navigate('/auth');
         }
-    }
+    };
 
     if (!openModal) return null;
 
@@ -68,17 +64,20 @@ export default function Modal({ openModal, setOpenModal }: ModalProps) {
                     ❔
                 </p>
                 <p className={styles.modal__bottom}>
-                    Вы точно хотите заморозить подписку?
+                    {isFrozen ? "Заморозив подписку, вы отказываетесь от участия в розыгрыше призов" : "Вы точно хотите заморозить подписку?"}
                 </p>
                 <div className={styles.modal__btns}>
                     <button className={styles.modal__btn} onClick={handleContinue}>
-                        Нет
+                        {!isFrozen ? "Нет" : "Подробнее"}
                     </button>
-                    <button className={styles.modal__btn} onClick={subscriptionFetch}>
-                        Да
+                    <button className={styles.modal__btn} onClick={handleContinue}>
+                        {!isFrozen ? "Да" : "Заморозить"}
                     </button>
                 </div>
             </div>
+            <button className={styles.modal__close} onClick={() => setOpenModal(false)}>
+                <Close className={styles.modal__close_svg}/>
+            </button>
         </div>
     );
 }

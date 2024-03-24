@@ -5,75 +5,77 @@ import { useUserContext } from '../../context/useUserContext';
 import { LoaderContext } from '../../context/LoaderContext';
 import { enqueueSnackbar } from 'notistack';
 import apiFetch from '../../config/api';
+import Close from "../../assets/imgs/close.svg?react";
 
 interface ModalProps {
-    openModal: boolean
-    setOpenModal: (open: boolean) => void
+    openModal: boolean;
+    setOpenModal: (open: boolean) => void;
 }
 
 export default function Modal({ openModal, setOpenModal }: ModalProps) {
 
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
+    const [step, setStep] = useState(false);
+    const [oldToken, setOldToken] = useState('');
+    const [newToken, setNewToken] = useState('');
 
-    const [step, setStep] = useState(false)
-    const [oldToken, setOldToken] = useState('')
-    const [newToken, setNewToken] = useState('')
+    const modalRef = useRef(null);
 
-    const modalRef = useRef(null)
-
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const { updateUser, user } = useUserContext();
-
     const { showLoading, hideLoading } = useContext(LoaderContext);
 
     useEffect(() => {
-        setOpen(openModal)
-    }, [openModal])
+        setOpen(openModal);
+    }, [openModal]);
 
     useEffect(() => {
         if (!open) {
             const timer = setTimeout(() => {
-                setOpenModal(false)
-                setOldToken('')
-                setStep(false)
+                setOpenModal(false);
+                setOldToken('');
+                setStep(false);
             }, 300);
-            return () => clearTimeout(timer)
+            return () => clearTimeout(timer);
         }
-    }, [open, setOpenModal])
+    }, [open, setOpenModal]);
 
     const changeTokenFetch = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+        e.preventDefault();
         if (!step) {
             if (user != null) {
                 await apiFetch(`/auth/change_token`, 'POST', {
                     auth_token: oldToken
                 }, 'cabinet', enqueueSnackbar, navigate, showLoading, hideLoading).then(async (res) => {
                     if (res.status === true) {
-                        await updateUser()
-                        setStep(true)
-                        setNewToken(res.auth_token)
+                        await updateUser();
+                        setStep(true);
+                        setNewToken(res.auth_token);
                     }
-                    return null
-                })
+                });
             } else {
-                navigate('/auth')
+                navigate('/auth');
             }
         } else {
             navigator.clipboard.writeText(newToken);
-            setOpen(false)
+            setOpen(false);
         }
-    }
+    };
 
-    if (!openModal) return null
+    const closeModal = () => {
+        setOpenModal(false);
+    };
+
+    if (!openModal) return null;
 
     return (
-        <div className={styles.modal} style={{ opacity: open ? 1 : 0 }} onClick={() => setOpen(false)} >
+        <div className={styles.modal} style={{ opacity: open ? 1 : 0 }}>
             <div
                 ref={modalRef}
                 className={styles.modal__container}
                 onClick={(e) => {
-                    e.stopPropagation()
+                    e.stopPropagation();
                 }}
             >
                 <p className={styles.modal__top}>
@@ -87,7 +89,7 @@ export default function Modal({ openModal, setOpenModal }: ModalProps) {
                 </p>
                 <form action="" className={styles.modal__form} onSubmit={changeTokenFetch}> 
                     <input type="text" name="key" className={styles.modal__input} autoComplete="off" value={oldToken} onChange={(e) => {
-                        setOldToken(e.target.value)
+                        setOldToken(e.target.value);
                     }} />
                     {step && (
                         <>
@@ -103,7 +105,10 @@ export default function Modal({ openModal, setOpenModal }: ModalProps) {
                         {!step ? 'Сменить' : 'Скопировать'}
                     </button>
                 </form>
+                <button className={styles.modal__close} onClick={closeModal}>
+                    <Close className={styles.modal__close_svg}/>
+                </button>
             </div>
         </div>
-    );
+    )
 }

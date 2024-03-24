@@ -1,4 +1,4 @@
-import styles from './Start.module.sass'
+import styles from './StartYandex.module.sass'
 
 import { Link, useLocation } from 'react-router-dom'
 import Icon from "../../assets/imgs/click.svg?react"

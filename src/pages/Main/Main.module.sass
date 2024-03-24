@@ -4,7 +4,7 @@
     overflow: hidden
     display: flex
     align-items: center
-    justify-content: center
+    justify-content: flex-start
     // margin: 265px auto
     position: relative
     z-index: 10
@@ -66,3 +66,50 @@
         padding: 16px 40px
         &:first-child
             margin-right: 30px
+    @media only screen and ( max-width: 1439px )
+        flex-direction: column
+        &::before
+            bottom: 0
+            right: -264px
+            top: unset
+            width: 85%
+            aspect-ratio: 964/549
+            transform: rotate(90deg)
+        &::after
+            bottom: 0px
+            left: 0
+            width: 62%
+            aspect-ratio: 964/549
+        &__container
+            margin-top: 70px
+            padding: 0 30px
+    @media only screen and ( max-width: 959px )
+        &__container
+            margin-top: 110px
+        &__title
+            font-size: 2.375em
+            margin-bottom: 16px
+        &__descr
+            font-size: 0.875em
+            margin-bottom: 40px
+        &__btn
+            font-size: 0.875em
+            padding: 10px
+            &:not(:last-child)
+                margin-right: 10px
+    @media only screen and ( max-width: 639px )
+        &::before
+            display: none
+        &__container
+            margin-top: 110px
+            padding: 0 20px
+        &__descr
+            margin-bottom: 60px
+    @media only screen and ( max-width: 479px )
+        &::before
+            display: none
+        &__container
+            margin-top: 70px
+            padding: 0 20px
+        &__descr
+            margin-bottom: 60px

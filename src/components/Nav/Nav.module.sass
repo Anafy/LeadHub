@@ -1,0 +1,47 @@
+.nav
+    width: 100%
+    box-sizing: border-box
+    display: none
+    align-items: stretch
+    justify-content: space-between
+    &__container
+        box-sizing: border-box
+        padding: 40px
+        width: 100%
+        display: flex
+        align-items: center
+        justify-content: space-between
+    &__btn
+        background-color: #7540EF
+        box-sizing: border-box
+        padding: 10px
+        border-radius: 4px
+        z-index: 8
+        &::before
+            content: ""
+            display: block
+            width: 24px
+            height: 2px
+            background-color: #FFFFFF
+            margin-bottom: 6px
+            z-index: 10
+        &::after
+            content: ""
+            display: block
+            width: 24px
+            height: 2px
+            background-color: #FFFFFF
+            z-index: 10
+    &__line
+        display: block
+        width: 24px
+        height: 2px
+        background-color: #FFFFFF
+        margin-bottom: 6px
+        z-index: 10
+    @media only screen and ( max-width: 1439px )
+        display: flex
+    @media only screen and ( max-width: 959px )
+        &__container
+            padding: 20px
+    

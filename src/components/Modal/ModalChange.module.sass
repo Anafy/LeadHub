@@ -91,3 +91,45 @@
         line-height: 1
         margin-bottom: 30px
         color: #181818
+    &__close
+        display: none
+    @media only screen and ( max-width: 959px )
+        &__top
+            max-width: 30px
+            font-size: 1em
+            line-height: 18.4px
+            padding: 4px
+            margin-bottom: 16px
+        &__bottom
+            font-size: 1.375em
+        &__container
+            max-width: 295px
+            padding: 40px 20px
+    @media only screen and ( max-width: 639px )
+        background-color: #FFFFFF
+        &__bottom
+            font-size: 1.375em
+            margin-bottom: 12px
+        &__text
+            margin-bottom: 60px
+        &__container
+            padding: 0
+            max-width: none
+            box-shadow: none
+        &__btn
+            max-width: none
+        &__amount
+            margin-bottom: 60px
+        &__close
+            display: flex
+            background-color: #7540EF
+            border-radius: 6px
+            box-sizing: border-box
+            padding: 10px
+            position: absolute
+            top: -20px
+            right: 10px
+            &_svg
+                max-width: 18px
+                width: 100%
+                height: auto

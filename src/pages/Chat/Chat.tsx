@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom"
 import apiFetch from "../../config/api"
 import { useUserContext } from "../../context/useUserContext"
 import { LoaderContext } from "../../context/LoaderContext"
+import Nav from '../../components/Nav/Nav';
 
 export default function Chat({ai, title} : ChatProps) {
 
@@ -51,6 +52,7 @@ export default function Chat({ai, title} : ChatProps) {
 
     return (
         <div className={styles.chat}>
+            <Nav/>
             <div className={styles.chat__container}>
                 <div className={styles.chat__top}>
                     {ai === 'gpt' && (

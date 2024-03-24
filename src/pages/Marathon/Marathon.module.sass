@@ -151,4 +151,93 @@
             line-height: 1
             box-sizing: border-box
             padding: 24px 50px
+    @media only screen and ( max-width: 1439px )
+        flex-direction: column
+        justify-content: flex-start
+        &__container
+            padding: 70px 40px
+        &__title
+            font-size: 3.5em
+            margin-bottom: 30px
+        &__timer
+            margin-bottom: 130px
+        &__list
+            display: flex
+            grid-template-columns: none
+            margin-bottom: 60px
+            overflow-x: auto
+            overflow-x: scroll
+            max-width: none
+        &__item
+            max-width: 430px
+            padding: 20px
+        &__info
+            max-width: 390px
+        &__right
+            font-size: 1.25em
+    @media only screen and ( max-width: 959px )
+        &__container
+            padding: 90px 20px
+        &__title
+            font-size: 2.375em
+        &__timer
+            margin-bottom: 80px
+        &__list
+            grid-gap: 10px
+        &__item
+            max-width: 295px
+            padding: 13px
+        &__info
+            max-width: none
+        &__right
+            font-size: 0.875em
+        &__hidden
+            margin-top: 0
+            &_text
+                font-size: 1.75em
+    @media only screen and ( max-width: 639px )
+        &__timer
+            margin-bottom: 75px
+        &__hidden
+            margin-top: 0
+            &_btn
+                padding: 25px 0
+                width: 100%
+                font-size: 1.375em
+        &__list
+            display: flex
+            margin-bottom: 60px
+            overflow-x: auto
+            overflow-x: scroll
+            max-width: none
+        &__item
+            max-width: 430px
+            padding: 20px
+        &__info
+            max-width: 390px
+        &__right
+            font-size: 1.25em
+    @media only screen and ( max-width: 479px )
+        &__timer
+            margin-bottom: 36px
+        &__hidden
+            margin-top: 0
+            &_btn
+                padding: 25px 0
+                width: 100%
+                font-size: 1em
+        &__descr
+            font-size: 1.375em
+            margin-bottom: 20px
+        &__count
+            font-size: 2.625em
+        &__list
+            flex-direction: column
+        &__item
+            max-width: 430px
+            padding: 20px
+        &__info
+            max-width: 390px
+        &__right
+            font-size: 1.25em
            

@@ -9,6 +9,7 @@ import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 import { LoaderContext } from '../../context/LoaderContext';
 import { useUserContext } from '../../context/useUserContext';
+import Nav from '../../components/Nav/Nav';
 
 export default function Profile() {
 
@@ -76,6 +77,7 @@ export default function Profile() {
 
     return (
         <div className={styles.profile}>
+            <Nav/>
             <div className={styles.profile__container}>
                 <p className={styles.profile__title}>
                     Профиль

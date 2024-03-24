@@ -122,3 +122,59 @@
         align-items: flex-start
         flex-direction: column
         justify-content: flex-start
+    @media only screen and ( max-width: 959px )
+        max-width: 295px
+        padding: 25px 0
+        &__link
+            font-size: 0.625em
+            margin-top: 12px
+            margin-right: 12px
+        &__circle
+            padding: 3px 4px 4px
+        &__descr
+            font-size: 0.875em
+        &__alert
+            font-size: 0.625em
+        &__form
+            padding: 0 12px
+            box-sizing: border-box
+        &__container
+            padding-bottom: 12px
+            max-width: none
+        &__title
+            margin-bottom: 20px
+    @media only screen and ( max-width: 639px )
+        max-width: none
+        margin: 0
+        height: unset
+        justify-content: flex-start
+        &__form
+            padding: 0 50px
+            margin-top: 180px
+            max-width: none
+        &__block
+            margin-bottom: 90px
+        &__link
+            margin-top: 20px
+            margin-right: 20px
+            margin-bottom: 133px
+        &__circle
+            margin-bottom: 16px
+        &__descr
+            margin-bottom: 60px
+        &__btn
+            margin-bottom: 50px
+    @media only screen and ( max-width: 479px )
+        &__form
+            padding: 0 20px
+            margin-top: 155px
+        &__block
+            margin-bottom: 60px
+        &__title
+            font-size: 1.25em
+            margin-bottom: 30px
+        &__descr
+            font-size: 0.875em
+            margin-bottom: 50px
+        &__btn
+            margin-bottom: 60px
