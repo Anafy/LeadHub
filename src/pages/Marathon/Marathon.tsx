@@ -87,7 +87,7 @@ export default function Marathon() {
             <div className={styles.marathon}>
                 <div className={styles.marathon__container}>
                     <p className={styles.marathon__title}>
-                        Марафон призов от BlendBot
+                        Марафон призов от CHAT-GURU
                     </p>
                     <p className={styles.marathon__descr}>
                         Розыгрыш закончится ⏳ через: 
