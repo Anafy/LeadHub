@@ -20,7 +20,7 @@ function App() {
   const snackbar = useSnackbar();
 
   return (
-    <SnackbarProvider maxSnack={3} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+    <SnackbarProvider maxSnack={3} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} style={{ zIndex: 99999999 }}>
       <SnackbarContext.Provider value={snackbar}>
         <LoaderProvider>
           <Loader/>
