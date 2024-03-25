@@ -70,7 +70,7 @@ export default function NavMenu() {
                             </span>
                             Тех. поддержка
                         </Link>
-                        <a href='https://leadhub.partner.alanbase.com/registration?ref=1' target='_blank' rel='noreferrer noopener'  className={styles.menu__link}>
+                        <a href='https://leadhub.partner.alanbase.com/registration?ref=1' target='_blank' rel='noreferrer noopener' className={styles.menu__link}>
                             <span className={styles.menu__icon}>
                                 🤝
                             </span>

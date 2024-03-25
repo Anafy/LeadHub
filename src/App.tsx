@@ -35,7 +35,7 @@ function App() {
               <Route path='/activate' element={<Activate/>} />
               <Route path='/auth' element={<Auth/>} />
               <Route path='/cabinet/*' element={<Cabinet/>} />
-              <Route path='*' element={<Navigate to={`/lp1`} replace />} />
+              <Route path='*' element={<Navigate to={`/activate`} replace />} />
             </Routes>
           </Router>
         </LoaderProvider>

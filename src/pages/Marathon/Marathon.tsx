@@ -183,9 +183,9 @@ export default function Marathon() {
                             <p className={styles.marathon__hidden_text}>
                                 Результаты розыгрыша и дополнительные подарки от партнеров в нашем telegram-канале 👇
                             </p>
-                            <button className={styles.marathon__hidden_btn}>
+                            <a href='https://t.me/+Tavo7X66rCg0YTBk' target='_blank' rel='noreferrer noopener' className={styles.marathon__hidden_btn}>
                                 Telegram-канал "Марафон призов"
-                            </button>
+                            </a>
                         </div>
                     )}
                 </div>
