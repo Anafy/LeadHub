@@ -46,13 +46,13 @@
         flex-direction: column
         justify-content: flex-start
         width: 100%
-        padding: 25px 40px 0
+        padding: 25px 40px 68px
         box-sizing: border-box
         overflow: hidden
     &__messages
         flex-grow: 1
         overflow-y: auto
-        padding-bottom: 115px
+        padding-bottom: 40px
         scrollbar-width: none
         &::-webkit-scrollbar
             display: none
@@ -117,6 +117,7 @@
         line-height: 1
         color: #2F3647
         width: 100%
+        background-color: #FFFFFF
     &__input::placeholder
         color: #2F3647
     &__submit
@@ -159,6 +160,12 @@
         white-space: nowrap
     &__space
         width: 30px
+    &__form
+        position: fixed
+        bottom: 20px
+        width: calc(100% - 440px)
+        z-index: 9999
+        background-color: #FFFFFF
     @media only screen and ( max-width: 1439px )
         flex-direction: column
         height: 100%
@@ -168,18 +175,14 @@
         &__container
             max-height: calc( 100dvh - 118px )
         &__form
-            position: fixed
-            bottom: 20px
             width: calc(100% - 80px)
-            z-index: 9999
-            background-color: #FFFFFF
     @media only screen and ( max-width: 959px )
         &__container
             max-height: calc( 100dvh - 78px )
             min-height: none
             height: 100%
         &__bottom
-            padding: 25px 20px 0
+            padding: 25px 20px 68px
         &__form
             position: fixed
             bottom: 20px

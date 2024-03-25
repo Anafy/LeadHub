@@ -3,6 +3,7 @@ import Send from "../../assets/imgs/send.svg?react"
 import styles from "./Chat.module.sass"
 
 import chatgpt from "../../assets/imgs/chatgpt.png"
+import dalle from "../../assets/imgs/dalle.png"
 import ChatMessage from "./ChatMessage"
 import { useContext, useEffect, useState } from "react"
 import { enqueueSnackbar } from "notistack"
@@ -53,8 +54,10 @@ export default function Chat({ai, title} : ChatProps) {
         <div className={styles.chat}>
             <div className={styles.chat__container}>
                 <div className={styles.chat__top}>
-                    {ai === 'gpt' && (
+                    {ai === 'gpt' ? (
                         <img src={chatgpt} className={styles.chat__logo} />
+                    ) : (
+                        <img src={dalle} className={styles.chat__logo} />
                     )}
                     <p className={styles.chat__logo_descr}>
                         {title}
