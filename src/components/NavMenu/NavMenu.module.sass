@@ -142,6 +142,11 @@
             height: 100%
             z-index: 999
             pointer-events: none
+            width: 100%
+            display: flex
+            align-items: flex-start
+            justify-content: space-between
+            padding-top: 160px
             &[data-open="true"]
                 overflow-x: hidden
                 overflow-y: scroll
@@ -151,6 +156,10 @@
                 scrollbar-width: none
                 &::-webkit-scrollbar
                     display: none
+            &_left
+                max-width: 500px
+                width: 100%
+                margin-right: 50px
         &__top
             display: flex
             align-items: center
@@ -161,10 +170,18 @@
             z-index: 9999
     @media only screen and ( max-width: 959px )
         padding: 20px
+        &__content
+            padding: 50px 20px
+            padding-top: 120px
     @media only screen and ( max-width: 639px )
         &__content
             flex-direction: column
             margin-bottom: 110px
+            &_right
+                width: 100%
+            &_left
+                margin-right: 0
+                max-width: none
         &__top
             margin-bottom: 110px
     
