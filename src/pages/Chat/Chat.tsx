@@ -78,12 +78,14 @@ export default function Chat({ai, title} : ChatProps) {
                             <ChatMessage key={index} message={item} title={title} type={ai} />
                         ))}
                     </ul>
-                    <form action="" className={styles.chat__form} onSubmit={sendMessage}>
-                        <input maxLength={300} className={styles.chat__input} type="text" name="text" placeholder="Отправьте сообщение" autoComplete="off" value={message} onChange={(e) => setMessage(e.target.value)} />
-                        <button type="submit" className={styles.chat__submit}>
-                            <Send className={styles.chat__submit_svg}/>
-                        </button>
-                    </form>
+                    <div className={styles.chat__formal}>
+                        <form action="" className={styles.chat__form} onSubmit={sendMessage}>
+                            <input maxLength={300} className={styles.chat__input} type="text" name="text" placeholder="Отправьте сообщение" autoComplete="off" value={message} onChange={(e) => setMessage(e.target.value)} />
+                            <button type="submit" className={styles.chat__submit}>
+                                <Send className={styles.chat__submit_svg}/>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

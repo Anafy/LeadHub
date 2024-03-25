@@ -20,7 +20,6 @@
         align-items: flex-start
         justify-content: space-between
         flex-direction: column
-        padding-bottom: 14px
         gap: 10px
         z-index: 10
     &__top
@@ -101,6 +100,15 @@
             height: auto
             background-color: #00000033
             border-radius: 2px
+    &__formal
+        width: 100%
+        box-sizing: border-box
+        padding-bottom: 20px
+        position: fixed
+        z-index: 992
+        background-color: #F5FAFF
+        bottom: 0
+        width: calc(100% - 440px)
     &__form
         border: 1px solid #D7D7D7
         border-radius: 10px
@@ -161,9 +169,6 @@
     &__space
         width: 30px
     &__form
-        position: fixed
-        bottom: 20px
-        width: calc(100% - 440px)
         z-index: 9999
         background-color: #FFFFFF
     @media only screen and ( max-width: 1439px )
@@ -174,6 +179,8 @@
             border-top: 1px solid #D7D7D7
         &__container
             max-height: calc( 100dvh - 118px )
+        &__formal
+            width: calc(100% - 80px)
         &__form
             width: calc(100% - 80px)
     @media only screen and ( max-width: 959px )
@@ -184,6 +191,12 @@
         &__bottom
             padding: 25px 20px 68px
         &__form
+            position: fixed
+            bottom: 20px
+            width: calc(100% - 40px)
+            z-index: 9999
+            background-color: #FFFFFF
+        &__formal
             position: fixed
             bottom: 20px
             width: calc(100% - 40px)
