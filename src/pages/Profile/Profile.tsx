@@ -1,6 +1,6 @@
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import ModalChange from '../../components/Modal/ModalChange';
 import ModalFreeze from '../../components/Modal/ModalFreeze';
 import styles from './Profile.module.sass';
@@ -73,6 +73,32 @@ export default function Profile() {
     
         return differenceInDays;
     }
+
+    useLayoutEffect(() => {
+        const updateSize = () => {
+            setOpenModalChange(false)
+            setOpenModalFreeze(false)
+        }
+    
+        window.addEventListener('resize', updateSize)
+        return () => window.addEventListener('resize', updateSize)
+    })
+
+    useEffect(() => {
+        if (openModalChange) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.cssText = ''
+        }
+    }, [openModalChange])
+
+    useEffect(() => {
+        if (openModalFreeze) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.cssText = ''
+        }
+    }, [openModalFreeze])
 
     return (
         <div className={styles.profile}>
