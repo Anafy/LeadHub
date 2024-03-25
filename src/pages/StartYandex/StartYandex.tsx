@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import Icon from "../../assets/imgs/click.svg?react"
 import { useEffect } from 'react';
 
-export default function Start() {
+export default function StartYandex() {
 
     const location = useLocation();
 
