@@ -52,7 +52,7 @@
     &__messages
         flex-grow: 1
         overflow-y: auto
-        padding-bottom: 40px
+        padding-bottom: 115px
         scrollbar-width: none
         &::-webkit-scrollbar
             display: none
@@ -167,20 +167,25 @@
             border-top: 1px solid #D7D7D7
         &__container
             max-height: calc( 100dvh - 118px )
+        &__form
+            position: fixed
+            bottom: 20px
+            width: calc(100% - 80px)
+            z-index: 9999
+            background-color: #FFFFFF
     @media only screen and ( max-width: 959px )
         &__container
             max-height: calc( 100dvh - 78px )
             min-height: none
+            height: 100%
         &__bottom
             padding: 25px 20px 0
-            display: flex
-            flex-direction: column
-            flex-grow: 1
-            min-height: calc(100vh - 100px)
-            max-height: calc(100vh - 100px)
-            overflow-y: auto
         &__form
-            margin-top: auto
+            position: fixed
+            bottom: 20px
+            width: calc(100% - 40px)
+            z-index: 9999
+            background-color: #FFFFFF
     @media only screen and ( max-width: 479px )
         &__message
             &_descr
