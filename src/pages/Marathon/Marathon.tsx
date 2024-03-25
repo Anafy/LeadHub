@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import styles from './Marathon.module.sass';
 import Modal from '../../components/Modal/Modal';
 import { useUserContext } from '../../context/useUserContext';
@@ -81,6 +81,23 @@ export default function Marathon() {
             return null
         })
     }
+
+    useLayoutEffect(() => {
+        const updateSize = () => {
+            setOpenModal(false)
+        }
+    
+        window.addEventListener('resize', updateSize)
+        return () => window.addEventListener('resize', updateSize)
+    })
+
+    useEffect(() => {
+        if (openModal) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.cssText = ''
+        }
+    }, [openModal])
 
     return (
         <>
