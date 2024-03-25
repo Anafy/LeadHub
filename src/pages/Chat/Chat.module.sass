@@ -53,6 +53,9 @@
         flex-grow: 1
         overflow-y: auto
         padding-bottom: 40px
+        scrollbar-width: none
+        &::-webkit-scrollbar
+            display: none
     &__message
         display: flex
         &:not(:last-child)
@@ -164,7 +167,8 @@
             border-top: 1px solid #D7D7D7
     @media only screen and ( max-width: 959px )
         &__container
-            max-height: calc( 100dvh - 88px )
+            max-height: calc( 100dvh - 78px )
+            min-height: none
         &__bottom
             padding: 25px 20px 0
     @media only screen and ( max-width: 479px )
