@@ -108,7 +108,7 @@
         z-index: 992
         background-color: #F5FAFF
         bottom: 0
-        width: calc(100% - 440px)
+        width: 100%
     &__form
         border: 1px solid #D7D7D7
         border-radius: 10px
@@ -120,6 +120,7 @@
         display: flex
         align-items: center
         justify-content: space-between
+        width: 100%
     &__input
         font-size: 1.125em
         line-height: 1
@@ -181,8 +182,6 @@
             max-height: calc( 100dvh - 118px )
         &__formal
             width: calc(100% - 80px)
-        &__form
-            width: calc(100% - 80px)
     @media only screen and ( max-width: 959px )
         &__container
             max-height: calc( 100dvh - 78px )
@@ -190,18 +189,8 @@
             height: 100%
         &__bottom
             padding: 25px 20px 68px
-        &__form
-            position: fixed
-            bottom: 20px
-            width: calc(100% - 40px)
-            z-index: 9999
-            background-color: #FFFFFF
         &__formal
-            position: fixed
-            bottom: 20px
             width: calc(100% - 40px)
-            z-index: 9999
-            background-color: #FFFFFF
     @media only screen and ( max-width: 479px )
         &__message
             &_descr
