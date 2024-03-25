@@ -6,11 +6,6 @@ import apiFetch from '../../config/api';
 import { LoaderContext } from '../../context/LoaderContext';
 import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
-import Nav from '../../components/Nav/Nav';
-// import { Swiper, SwiperSlide } from 'swiper/react';
-
-// import 'swiper/css';
-// import 'swiper/css/pagination';
 
 export default function Marathon() {
 
@@ -90,7 +85,6 @@ export default function Marathon() {
     return (
         <>
             <div className={styles.marathon}>
-                <Nav/>
                 <div className={styles.marathon__container}>
                     <p className={styles.marathon__title}>
                         Марафон призов от BlendBot
@@ -157,37 +151,6 @@ export default function Marathon() {
                             </button>
                         ))}
                     </ul>
-                    {/* <Swiper 
-                        spaceBetween={20}
-                        slidesPerView={2}
-                        className={styles.marathon__list}
-                    >
-                        {data != null && data.formatted_main_prizes.map((item, i) => (
-                            <button 
-                                key={i} 
-                                className={styles.marathon__item}
-                                data-active={selectedItem === item.id ? 'true' : 'false'}
-                                onClick={() => {
-                                    !showHiddenBlock && setSelectedItem(item.id)
-                                }}
-                                style={{
-                                    filter: showHiddenBlock && selectedItem !== item.id ? 'grayscale(80%)' : 'none'
-                                }}
-                            >
-                                <div className={styles.marathon__img}>
-                                    <img src={item.image} />
-                                </div>
-                                <div className={styles.marathon__info}>
-                                    <p className={styles.marathon__left}>
-                                        🎁
-                                    </p>
-                                    <p className={styles.marathon__right}>
-                                        {item.name}
-                                    </p>
-                                </div>
-                            </button>
-                        ))}
-                    </Swiper> */}
                     {!showHiddenBlock && (
                         <button 
                             type="button" 

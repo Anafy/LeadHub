@@ -29,6 +29,8 @@ interface UserContextProps {
     user: User | null;
     setUser: React.Dispatch<React.SetStateAction<User | null>>;
     updateUser: () => Promise<null>;
+    isMenuOpen: boolean;
+    setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface MarathonDataMainPrizes {

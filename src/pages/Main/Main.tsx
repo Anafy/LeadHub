@@ -1,14 +1,12 @@
 import styles from './Main.module.sass'
 
 import { Link } from 'react-router-dom'
-import Nav from '../../components/Nav/Nav';
 
 export default function Main() {
 
     return (
         <>
             <div className={styles.main}>
-                <Nav/>
                 <div className={styles.main__container}>
                     <p className={styles.main__title}>
                         Используй нейросети без ограничений!

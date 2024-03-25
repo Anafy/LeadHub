@@ -2,13 +2,11 @@ import styles from './FAQ.module.sass'
 
 import faq from '../../jsons/faq.json'
 import FAQItem, { FAQItemType } from './FAQItem'
-import Nav from '../../components/Nav/Nav';
 
 export default function FAQ() {
 
     return (
         <div className={styles.faq}>
-            <Nav/>
             <div className={styles.faq__container}>
                 <p className={styles.faq__main_title}>
                     Техническая поддержка

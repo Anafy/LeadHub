@@ -1,17 +1,15 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import styles from './NavMenu.module.sass';
 import Logo from "../../assets/imgs/logo.svg?react";
 import { Link } from 'react-router-dom';
 import { useUserContext } from '../../context/useUserContext';
 
-export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
-    const { user } = useUserContext();
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+export default function NavMenu() {
+    const { user, isMenuOpen, setIsMenuOpen } = useUserContext();
 
-    const toggleMenu = () => {
-        setIsMenuOpen(prevState => !prevState);
-    };
-
+    const handlerOnClickLink = () => {
+        setIsMenuOpen(false);
+    }
 
     return (
         <div className={styles.menu}>
@@ -20,11 +18,11 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                     <Link to='/cabinet' className={styles.menu__logo_link}>
                         <Logo className={styles.menu__logo}/>
                     </Link>
-                    <button className={styles.menu__burger} onClick={onClose}>
+                    <button className={styles.menu__burger} onClick={() => setIsMenuOpen(value => !value)}>
                         <span className={styles.menu__line}/>
                     </button>
                 </div>
-                <div className={styles.menu__content}>
+                <div className={styles.menu__content} data-open={isMenuOpen}>
                     <div className={styles.menu__content_left}>
                         <div className={styles.menu__avatar}>
                             <span className={styles.menu__avatar_default}>
@@ -42,31 +40,31 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                         </p>
                     </div>
                     <div className={styles.menu__content_right}>
-                        <Link to='/cabinet/main' className={styles.menu__link}>
+                        <Link to='/cabinet/main' className={styles.menu__link} onClick={handlerOnClickLink}>
                             <span className={styles.menu__icon}>
                                 🚀
                             </span>
                             Главная
                         </Link>
-                        <Link to='/cabinet/ai' className={styles.menu__link}>
+                        <Link to='/cabinet/ai' className={styles.menu__link} onClick={handlerOnClickLink}>
                             <span className={styles.menu__icon}>
                                 👾
                             </span>
                             Нейросети
                         </Link>
-                        <Link to='/cabinet/marathon' className={styles.menu__link}>
+                        <Link to='/cabinet/marathon' className={styles.menu__link} onClick={handlerOnClickLink}>
                             <span className={styles.menu__icon}>
                                 🎁
                             </span>
                             Марафон призов
                         </Link>
-                        <Link to='/cabinet/profile' className={styles.menu__link}>
+                        <Link to='/cabinet/profile' className={styles.menu__link} onClick={handlerOnClickLink}>
                             <span className={styles.menu__icon}>
                                 👤
                             </span>
                             Профиль
                         </Link>
-                        <Link to='/cabinet/faq' className={styles.menu__link}>
+                        <Link to='/cabinet/faq' className={styles.menu__link} onClick={handlerOnClickLink}>
                             <span className={styles.menu__icon}>
                                 ⚙️
                             </span>

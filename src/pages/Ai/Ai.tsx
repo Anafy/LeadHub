@@ -3,14 +3,12 @@ import styles from './Ai.module.sass'
 import Chatgpt from "../../assets/imgs/chatgpt.svg?react"
 import Dalle from "../../assets/imgs/dalle.svg?react"
 import { Link } from 'react-router-dom'
-import Nav from '../../components/Nav/Nav';
 
 export default function Ai() {
 
     return (
         <>
             <div className={styles.ai}>
-                <Nav/>
                 <div className={styles.ai__container}>
                     <p className={styles.ai__title}>
                         Выберите нейросеть

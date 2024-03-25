@@ -4,20 +4,22 @@ import Marathon from "../../pages/Marathon/Marathon";
 import Profile from "../../pages/Profile/Profile";
 import FAQ from "../../pages/FAQ/FAQ";
 import Choose from "../../pages/Ai/Ai";
-import NavMenu from "../NavMenu/NavMenu";
 
 import styles from './Cabinet.module.sass'
 import Chat from "../../pages/Chat/Chat";
 import { useSnackbar } from "notistack";
 import apiFetch from "../../config/api";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { LoaderContext } from "../../context/LoaderContext";
+import NavMenu from "../NavMenu/NavMenu";
 
 
 export default function Cabinet() {
 
     const [user, setUser] = useState<User | null>(null);
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const { enqueueSnackbar } = useSnackbar();
 
@@ -38,8 +40,25 @@ export default function Cabinet() {
         updateUser();
     }, []);
 
+    useLayoutEffect(() => {
+        const updateSize = () => {
+            setIsMenuOpen(false)
+        }
+    
+        window.addEventListener('resize', updateSize)
+        return () => window.addEventListener('resize', updateSize)
+    })
+
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.cssText = ''
+        }
+    }, [isMenuOpen])
+
     return (
-        <UserContext.Provider value={{ user, setUser, updateUser }}>
+        <UserContext.Provider value={{ user, setUser, updateUser, isMenuOpen, setIsMenuOpen }}>
             <main className={styles.cabinet}>
                 <NavMenu/>
                 <Routes>

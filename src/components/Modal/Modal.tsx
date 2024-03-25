@@ -19,6 +19,7 @@ export default function Modal({ openModal, setOpenModal, setShowHiddenBlock }: M
         if (!open) {
             const timer = setTimeout(() => {
                 setOpenModal(false)
+                document.body.scrollIntoView({ behavior: 'smooth', block: 'end' })
             }, 300)
             return () => clearTimeout(timer)
         }
