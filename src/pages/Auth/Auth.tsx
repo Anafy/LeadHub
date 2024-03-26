@@ -1,6 +1,7 @@
 import styles from './Auth.module.sass'
 import { Formik, Field, Form} from "formik"
 import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom'
 
 import * as Yup from "yup"
 
@@ -50,6 +51,9 @@ export default function Auth() {
     return (
         <>
             <div className={styles.auth}>
+                <Link to="/activate" className={styles.auth__link}>
+                    Регистрация
+                </Link>
                 <Formik
                     initialValues={{
                         key: ''

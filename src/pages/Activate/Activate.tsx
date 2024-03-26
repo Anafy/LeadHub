@@ -173,7 +173,7 @@ export default function Activate() {
                                         </span>
                                     </label>
                                     <p className={styles.activate__alert}>
-                                        Я согласен с <a href='' target='_blank' rel='noreferrer noopenner'  className={styles.activate__alert_underline}> условиями пользовательского соглашения и правилами платформы ChatGuru</a>
+                                        Я согласен с <a href='https://docs.google.com/document/d/16ssjB8CX_enTdUZQRT2FsPlRHecEUX0dVTOLeMJxd4g/edit' target='_blank' rel='noreferrer noopenner'  className={styles.activate__alert_underline}> условиями пользовательского соглашения</a> <a href='https://docs.google.com/document/d/1MMWfdvHj9un1K5-FxZphtrKujS148m90dYzrggvCNyQ/edit' target='_blank' rel='noreferrer noopenner'  className={styles.activate__alert_underline}> и правилами платформы Chat-Guru</a>
                                     </p>
                                 </div>
                                 <p className={styles.activate__alerts}>

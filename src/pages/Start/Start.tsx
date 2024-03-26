@@ -37,7 +37,7 @@ export default function Start({color, image, adaptiveImage}: {color: string, ima
                             Марафон призов от ChatGuru
                         </p> */}
                         <p className={styles.start__descr}>
-                            Остался один шаг! 🔥
+                            Остался один шаг!
                         </p>
                         <Link to="/activate" className={styles.start__btn} style={{
                             backgroundColor: color,
