@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Start from "./pages/Start/Start.tsx"
 import Activate from "./pages/Activate/Activate.tsx"
 import Auth from "./pages/Auth/Auth.tsx"
+import Agreement from "./pages/Agreement/Agreement.tsx"
+import Rules from "./pages/Rules/Rules.tsx"
 import Cabinet from './components/Cabinet/Cabinet.tsx';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import { SnackbarContext } from './context/SnackbarContext.tsx';
@@ -41,6 +43,8 @@ function App() {
               <Route path='/lp5' element={<Start color={'#FF2FA4'} image={lp5Image} adaptiveImage={lp5AdaptiveImage} />} />
               <Route path='/lp6' element={<Start color={'#FF6300'} image={lp6Image} adaptiveImage={lp6AdaptiveImage} />} />
               <Route path='/activate' element={<Activate/>} />
+              <Route path='/agreement' element={<Agreement/>} />
+              <Route path='/rules' element={<Rules/>} />
               <Route path='/auth' element={<Auth/>} />
               <Route path='/cabinet/*' element={<Cabinet/>} />
               <Route path='*' element={<Navigate to={`/activate`} replace />} />
