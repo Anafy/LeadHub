@@ -63,8 +63,8 @@ export default function Activate() {
                     var widget = new pw.PayWidget();
                     widget.pay(
                         {
-                            serviceId: '22667',
-                            key: '04749a7b873cc6d71864d6f7d4527b32bd5aacdaf5e57960c49d333115f80c07d784c932fc8229b3a9fee61e13f20c8501fbc9162c14dabb94edee9349fdc2e2d2',
+                            serviceId: '23101',
+                            key: '042d6661fe666479dd202dc941051edd52eed9dd9c8bf0d337fda03d828e4c5d7b3b2a02698e610a3b144dbfc939c90840c4760f041525a0197282c8c3dfb2d9ee',
                             logger: true,
                         },
                         {
@@ -176,9 +176,11 @@ export default function Activate() {
                                         Я согласен с <Link to="/agreement"  className={styles.activate__alert_underline}> условиями пользовательского соглашения</Link> <Link to="/rules" className={styles.activate__alert_underline}> и правилами платформы Chat-Guru</Link>
                                     </p>
                                 </div>
-                                <p className={styles.activate__alerts}>
+                                {/* 
+                                    <p className={styles.activate__alerts}>
                                         Нажимая кнопку "Оплатить", вы соглашаетесь с планом списания продукта. *Первые 7 дней – 1₽, далее 790₽ раз в 7 дней согласно системе списания. Отмена — в любой момент.
                                     </p>
+                                */}
                                 <button type="submit" disabled={isSubmitting} className={styles.activate__btn}>
                                     Оплатить 1₽
                                 </button>
