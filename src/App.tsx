@@ -24,6 +24,7 @@ import lp5Image from './assets/imgs/start5.png';
 import lp5AdaptiveImage from './assets/imgs/start-bg5.png';
 import lp6Image from './assets/imgs/start6.png';
 import lp6AdaptiveImage from './assets/imgs/start-bg6.png';
+import Landing from './pages/Landing/Landing.tsx';
 
 function App() {
 
@@ -46,8 +47,9 @@ function App() {
               <Route path='/agreement' element={<Agreement/>} />
               <Route path='/rules' element={<Rules/>} />
               <Route path='/auth' element={<Auth/>} />
+              <Route path='/' element={<Landing/>} />
               <Route path='/cabinet/*' element={<Cabinet/>} />
-              <Route path='*' element={<Navigate to={`/activate`} replace />} />
+              <Route path='*' element={<Navigate to={`/`} replace />} />
             </Routes>
           </Router>
         </LoaderProvider>
