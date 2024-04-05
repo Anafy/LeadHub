@@ -1,49 +1,49 @@
 @font-face {
     font-family: Montserrat;
     font-display: swap;
-    src: url("../fonts/Montserrat-Black.woff2") format("woff2"), url("../fonts/Montserrat-Black.woff") format("woff");
+    src: url("../../assets/fonts/Montserrat-Black.woff2") format("woff2");
     font-style: normal;
     font-weight: 900;
   }
   @font-face {
     font-family: Montserrat;
     font-display: swap;
-    src: url("../fonts/Montserrat-Bold.woff2") format("woff2"), url("../fonts/Montserrat-Bold.woff") format("woff");
+    src: url("../../assets/fontsMontserrat-Bold.woff2") format("woff2");
     font-style: normal;
     font-weight: 700;
   }
   @font-face {
     font-family: Montserrat;
     font-display: swap;
-    src: url("../fonts/Montserrat-Light.woff2") format("woff2"), url("../fonts/Montserrat-Light.woff") format("woff");
+    src: url("../../assets/fontsMontserrat-Light.woff2") format("woff2");
     font-style: normal;
     font-weight: 300;
   }
   @font-face {
     font-family: Montserrat;
     font-display: swap;
-    src: url("../fonts/Montserrat-SemiBold.woff2") format("woff2"), url("../fonts/Montserrat-SemiBold.woff") format("woff");
+    src: url("../../assets/fontsMontserrat-SemiBold.woff2") format("woff2");
     font-style: normal;
     font-weight: 600;
   }
   @font-face {
     font-family: Montserrat;
     font-display: swap;
-    src: url("../fonts/Montserrat-Regular.woff2") format("woff2"), url("../fonts/Montserrat-Regular.woff") format("woff");
+    src: url("../../assets/fontsMontserrat-Regular.woff2") format("woff2");
     font-style: normal;
     font-weight: 400;
   }
   @font-face {
     font-family: Montserrat;
     font-display: swap;
-    src: url("../fonts/Montserrat-ExtraBold.woff2") format("woff2"), url("../fonts/Montserrat-ExtraBold.woff") format("woff");
+    src: url("../../assets/fontsMontserrat-ExtraBold.woff2") format("woff2");
     font-style: normal;
     font-weight: 800;
   }
   @font-face {
     font-family: Montserrat;
     font-display: swap;
-    src: url("../fonts/Montserrat-Medium.woff2") format("woff2"), url("../fonts/Montserrat-Medium.woff") format("woff");
+    src: url("../../assets/fontsMontserrat-Medium.woff2") format("woff2");
     font-style: normal;
     font-weight: 500;
   }
@@ -3069,6 +3069,14 @@
     }
   
     h2 {
+      font-size: 32px;
+    }
+
+    .gradtitle {
+      font-size: 32px;
+    }
+
+    .text h2 {
       font-size: 32px;
     }
   
