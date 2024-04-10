@@ -4,6 +4,7 @@ import Start from "./pages/Start/Start.tsx"
 import Activate from "./pages/Activate/Activate.tsx"
 import Auth from "./pages/Auth/Auth.tsx"
 import Agreement from "./pages/Agreement/Agreement.tsx"
+import Landinggpt from "./pages/landinggpt/landinggpt.tsx"
 import Rules from "./pages/Rules/Rules.tsx"
 import Cabinet from './components/Cabinet/Cabinet.tsx';
 import { SnackbarProvider, useSnackbar } from 'notistack';
@@ -47,6 +48,7 @@ function App() {
               <Route path='/agreement' element={<Agreement/>} />
               <Route path='/rules' element={<Rules/>} />
               <Route path='/auth' element={<Auth/>} />
+              <Route path='/landinggpt' element={<Landinggpt/>} />
               <Route path='/' element={<Landing/>} />
               <Route path='/cabinet/*' element={<Cabinet/>} />
               <Route path='*' element={<Navigate to={`/`} replace />} />

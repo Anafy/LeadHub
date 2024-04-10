@@ -1,0 +1,112 @@
+.landing
+    &__faq
+        &_item
+            background-color: #111329
+            border-radius: 20px
+            &:not(:last-child)
+                margin-bottom: 10px
+        &_open
+            margin-right: 25px
+        &_label
+            font-size: 24px
+            line-height: 1
+            box-sizing: border-box
+            padding: 30px
+            width: 100%
+            display: flex
+            align-items: center
+            justify-content: flex-start
+            cursor: pointer
+            font-weight: 600
+            font-family: 'SF Pro Display', sans-serif
+        &_block
+            height: 0
+            overflow: hidden
+            transition: height .3s ease-in-out
+        &_descr
+            font-size: 20px
+            box-sizing: border-box
+            padding: 0 30px 30px 80px
+            line-height: 1
+            border-bottom-left-radius: 8px
+            border-bottom-right-radius: 8px
+            text-align: left
+            font-family: 'SF Pro Display', sans-serif
+            &_bold
+                font-weight: 700
+                font-family: 'SF Pro Display', sans-serif
+        &_opinion
+            font-size: 20px
+            color: #CFCFCF
+            line-height: 1
+            text-align: left
+            box-sizing: border-box
+            padding: 0 30px 30px 80px
+            font-family: 'SF Pro Display', sans-serif
+        &_feel
+            display: flex
+            align-items: flex-start
+            justify-content: flex-start
+        &_btn
+            &:not(:last-child)
+                margin-right: 6px
+    @media only screen and ( max-width: 1199px )
+        &__faq
+            margin-bottom: 146px
+            &_label
+                padding: 22px
+                font-size: 19px
+            &_open
+                margin-right: 19px
+                width: 9px
+                height: 17px
+            &_descr
+                font-size: 16px
+                padding: 0 22px 33px 50px
+            &_opinion
+                font-size: 16px
+                padding: 0 22px 26px 50px
+            &_icon
+                max-width: 19px
+                width: 100%
+                height: auto
+    @media only screen and ( max-width: 639px )
+        &__faq
+            margin-bottom: 170px
+            &_label
+                padding: 17px
+                font-size: 18px
+                text-align: left
+            &_item
+                border-radius: 12px
+            &_open
+                margin-right: 18px
+                width: 9px
+                height: 17px
+            &_descr
+                font-size: 18px
+                padding: 0 22px 15px 44px
+            &_opinion
+                font-size: 18px
+                padding: 0 22px 15px 44px
+            &_icon
+                max-width: 19px
+    @media only screen and ( max-width: 479px )
+        &__faq
+            margin-bottom: 130px
+            &_label
+                padding: 13px
+                font-size: 14px
+            &_item
+                border-radius: 10px
+            &_open
+                margin-right: 6px
+            &_descr
+                font-size: 14px
+                padding: 0 22px 15px 28px
+            &_opinion
+                font-size: 14px
+                padding: 0 22px 15px 28px
+            &_icon
+                max-width: 16px
+        
