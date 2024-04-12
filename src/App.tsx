@@ -48,8 +48,8 @@ function App() {
               <Route path='/agreement' element={<Agreement/>} />
               <Route path='/rules' element={<Rules/>} />
               <Route path='/auth' element={<Auth/>} />
-              <Route path='/landinggpt' element={<Landinggpt/>} />
-              <Route path='/' element={<Landing/>} />
+              <Route path='/' element={<Landinggpt/>} />
+              <Route path='/landing' element={<Landing/>} />
               <Route path='/cabinet/*' element={<Cabinet/>} />
               <Route path='*' element={<Navigate to={`/`} replace />} />
             </Routes>
