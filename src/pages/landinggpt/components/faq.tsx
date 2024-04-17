@@ -1,7 +1,7 @@
 import styles from './faq.module.sass';
 import Open from './../../../assets/imgs/landing-open.svg?react';
-import Yes from './../../../assets/imgs/landing-yes.svg?react';
-import No from './../../../assets/imgs/landing-no.svg?react';
+// import Yes from './../../../assets/imgs/landing-yes.svg?react';
+// import No from './../../../assets/imgs/landing-no.svg?react';
 import { useRef, useState } from 'react';
 
 export interface FAQItemType {
@@ -26,7 +26,7 @@ export default function FAQItem({ item }: FAQItemProps) {
                 <Open
                     className={styles.landing__faq_open}
                     style={{
-                        transform: open ? 'rotate(-180deg)' : 'rotate(0)',
+                        transform: open ? 'rotate(180deg)' : 'rotate(0)',
                     }}
                 />
                 {item.title}
@@ -40,7 +40,7 @@ export default function FAQItem({ item }: FAQItemProps) {
                 <p className={styles.landing__faq_descr}>
                     {item.descr}
                 </p>
-                <div className={styles.landing__faq_feel}>
+                {/* <div className={styles.landing__faq_feel}>
                     <p className={styles.landing__faq_opinion}>
                         Были ли этот ответ полезен?
                     </p>
@@ -50,7 +50,7 @@ export default function FAQItem({ item }: FAQItemProps) {
                     <button className={styles.landing__faq_btn}>
                         <No className={styles.landing__faq_icon}/>
                     </button>
-                </div>
+                </div> */}
             </div>
         </li>
     );

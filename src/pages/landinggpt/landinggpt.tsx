@@ -1,3 +1,9 @@
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Scrollbar } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/scrollbar';
+
 import styles from './landinggpt.module.sass';
 import Logo from "../../assets/imgs/landing-logo.svg?react";
 import BenefitsSvg1 from "../../assets/imgs/landing-benefits1.svg?react";
@@ -11,38 +17,11 @@ import UsingSvg2 from "../../assets/imgs/landing-using2.svg?react";
 import Footer from "../../assets/imgs/landing-footer.svg?react";
 import Accept from "../../assets/imgs/landing-accept.svg?react";
 import faq from './assets/jsons/faq.json'
+import reviews from './assets/jsons/reviews.json'
 import FAQItem, { FAQItemType } from './../landinggpt/components/faq'
 import { Link } from 'react-router-dom'
 
 export default function Landing() {
-    
-    const reviews = [
-        {
-            name: "Кирилл Нестеров",
-            age: "21 год",
-            description: "Я просто в восторге от CHATGURU! Мой сын всегда сталкивается с трудностями при выполнении домашних заданий, и вот тут на помощь пришел этот сервис. Он помог моему ребенку с быстрым разъяснением материала, расшифровкой сложных тем и даже предлагал различные подходы к решению задач. И что самое важное, нейросети помогают не только с материалами, но также стимулируют интерес к изучаемым предметам. Теперь мой сын с удовольствием занимается домашними заданиями. Спасибо CHATGURU!"
-        },
-        {
-            name: "Светлана Конкина",
-            age: "44 года",
-            description: "Использование сервиса CHATGURU в моей работе стало настоящим открытием. Я обнаружил, что я могу быстрее создавать качественный и привлекательный контент, используя комбинацию текста и изображений. Мне нравится, как ChatGPT генерирует идеи, а DALL-E в свою очередь предоставляет уникальные визуальные решения, что дает моему контенту новый уровень оригинальности."
-        },
-        {
-            name: "Кирилл Нестеров",
-            age: "21 год",
-            description: "Я просто в восторге от CHATGURU! Мой сын всегда сталкивается с трудностями при выполнении домашних заданий, и вот тут на помощь пришел этот сервис. Он помог моему ребенку с быстрым разъяснением материала, расшифровкой сложных тем и даже предлагал различные подходы к решению задач. И что самое важное, нейросети помогают не только с материалами, но также стимулируют интерес к изучаемым предметам. Теперь мой сын с удовольствием занимается домашними заданиями. Спасибо CHATGURU!"
-        },
-        {
-            name: "Мария Кондратьева",
-            age: "25 лет",
-            description: "Я удивлен тем, насколько CHATGURU улучшил мой процесс поиска информации. Когда мне нужно быстро найти информацию по конкретной теме, ChatGPT помогает мне в этом 24/7"
-        },
-        {
-            name: "Кирилл Нестеров",
-            age: "21 год",
-            description: "Я просто в восторге от CHATGURU! Мой сын всегда сталкивается с трудностями при выполнении домашних заданий, и вот тут на помощь пришел этот сервис. Он помог моему ребенку с быстрым разъяснением материала, расшифровкой сложных тем и даже предлагал различные подходы к решению задач. И что самое важное, нейросети помогают не только с материалами, но также стимулируют интерес к изучаемым предметам. Теперь мой сын с удовольствием занимается домашними заданиями. Спасибо CHATGURU!"
-        }
-      ];
 
     return (
         <>
@@ -65,7 +44,7 @@ export default function Landing() {
                         <div className={styles.landing__hero_light}>
 
                         </div>
-                        <p className={styles.landing__title}> <span className={styles.landing__title_span}> ChatGuru </span> - ваш источник неограниченного доступа к передовым нейросетям</p>
+                        <p className={styles.landing__title}> <span className={styles.landing__title_span}>ChatGuru</span> - ваш источник неограниченного доступа к передовым нейросетям</p>
                         <p className={styles.landing__subtitle}> Откройте <span className={styles.landing__subtitle_bold}> новые </span> горизонты использования <span className={styles.landing__subtitle_span}> искусственного интеллекта</span>. Сервис с <span className={styles.landing__subtitle_bold}> ChatGPT </span> и <span className={styles.landing__subtitle_bold}> DALL-E </span> на русском языке всего за  <span className={styles.landing__subtitle_bold}> 1 рубль </span>.</p>
                         <Link to="/activate" className={styles.landing__btn}>
                             Получить доступ за 1₽
@@ -170,12 +149,24 @@ export default function Landing() {
                         <p className={styles.landing__reviews_title}>
                             Отзывы клиентов
                         </p>
-                        <ul className={styles.landing__reviews_list}>
+                        <Swiper
+                            wrapperClass={styles.landing__reviews_wrapper}
+                            slidesPerView={'auto'}
+                            spaceBetween={0}
+                            modules={[Scrollbar]}
+                            scrollbar={{
+                                hide: false,
+                                dragClass: `${styles.landing__reviews_scrollbar_drag}`,
+                                horizontalClass: `${styles.landing__reviews_scrollbar}`,
+                                draggable: true
+                            }}
+                            className={styles.landing__reviews}
+                        >
                             {reviews.map((review, index) => (
-                                <li key={index} className={styles.landing__reviews_item}>
-                                    <div className={styles.landing__reviews_svg}>
-
-                                    </div>
+                                <SwiperSlide key={index} className={styles.landing__reviews_item}>
+                                    <div className={styles.landing__reviews_svg} style={{
+                                        backgroundImage: `url(${review.img})`
+                                    }} />
                                     <p className={styles.landing__reviews_subtitle}>
                                         {review.name}
                                     </p>
@@ -185,9 +176,9 @@ export default function Landing() {
                                     <p className={styles.landing__reviews_descr}>
                                         {review.description}
                                     </p>
-                                </li>
+                                </SwiperSlide>
                             ))}
-                        </ul>
+                        </Swiper>
                     </section>
                     <section className={styles.landing__using}>
                         <div className={styles.landing__using_container}>
