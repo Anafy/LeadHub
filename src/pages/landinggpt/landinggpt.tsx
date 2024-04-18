@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Scrollbar } from 'swiper/modules';
+import { Scrollbar, Mousewheel, FreeMode } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/scrollbar';
@@ -153,13 +153,18 @@ export default function Landing() {
                             wrapperClass={styles.landing__reviews_wrapper}
                             slidesPerView={'auto'}
                             spaceBetween={0}
-                            modules={[Scrollbar]}
+                            freeMode={false}
+                            modules={[FreeMode, Mousewheel, Scrollbar]}
                             scrollbar={{
                                 hide: false,
                                 dragClass: `${styles.landing__reviews_scrollbar_drag}`,
                                 horizontalClass: `${styles.landing__reviews_scrollbar}`,
                                 draggable: true
                             }}
+                            mousewheel={{
+                                releaseOnEdges: true,
+                            }}
+                            direction='horizontal'
                             className={styles.landing__reviews}
                         >
                             {reviews.map((review, index) => (
@@ -246,15 +251,15 @@ export default function Landing() {
                     <footer className={styles.landing__footer}>
                         <div className={styles.landing__footer_container}>
                             <p className={styles.landing__footer_left}>
-                                © 2024 CHATGURU. Все правы защищены”
+                                © 2024 CHATGURU. Все правы защищены
                             </p>
                             <div className={styles.landing__footer_right}>
-                                <Link to="/agreement" className={styles.landing__footer_text}>
+                                <a href="/agreement" target="_blank" rel="noopener noreferrer" className={styles.landing__footer_text}>
                                     Пользовательское соглашение
-                                </Link>
-                                <Link to="/rules" className={styles.landing__footer_text}>
+                                </a>
+                                <a href="/rules" target="_blank" rel="noopener noreferrer" className={styles.landing__footer_text}>
                                     Правила платформы
-                                </Link>
+                                </a>
                             </div>
                         </div>
                     </footer>
