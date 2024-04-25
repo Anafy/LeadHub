@@ -32,8 +32,8 @@ export default function FAQ() {
                         <p className={styles.faq__main_descr}>
                             Телеграм-бот:
                         </p>
-                        <a href="https://t.me/leadhubsupportbot" className={styles.faq__main_bold}>
-                            t.me/leadhubsupportbot
+                        <a href="https://t.me/ChatGuru_Helper_Bot" className={styles.faq__main_bold}>
+                            t.me/ChatGuru_Helper_Bot
                         </a>
                     </div>
                 </div>

@@ -42,11 +42,6 @@ export default function Activate() {
             const script = document.createElement('script');
             script.type = 'text/javascript';
 
-            let clickId = localStorage.getItem('click_id');
-            if (!clickId || clickId === '') {
-                clickId = '11111111';
-            }
-
             const generateRandomString = (length: number) => {
                 const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
                 let result = '';
@@ -55,6 +50,11 @@ export default function Activate() {
                 }
                 return result;
             };
+
+            let clickId = localStorage.getItem('click_id');
+            if (!clickId || clickId === '') {
+                clickId = generateRandomString(24);;
+            }
 
             const orderId = generateRandomString(15);
 

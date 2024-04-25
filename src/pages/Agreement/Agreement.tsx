@@ -31,8 +31,7 @@ export default function Agreement() {
                         <caption>Тарифы, действующие с 25 марта 2024 года:</caption>
                         <thead>
                             <tr>
-                                <th>Наименование Тарифа</th>
-                                <th>№</th>
+                                <th>Наименование Тарифа &#8470;&nbsp;1</th>
                                 <th>Описание Тарифа</th>
                                 <th>Количество дней действия Тарифа</th>
                                 <th>Стоимость Подписки (руб.)</th>
@@ -40,30 +39,26 @@ export default function Agreement() {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Нейросети</td>
+                                <td rowSpan={4} >Нейросети</td>
+                                <td rowSpan={4} >Доступ к сервису “ChatGuru”</td>
                                 <td>1</td>
-                                <td>Доступ к сервису “ChatGuru”</td>
-                                <td>1</td>
-                                <td>790</td>
+                                <td>799</td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td>2</td>
-                                <td></td>
+                                {/* <td></td>
+                                <td></td> */}
                                 <td>2</td>
                                 <td>490</td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td>3</td>
-                                <td></td>
+                                {/* <td></td>
+                                <td></td> */}
                                 <td>3</td>
                                 <td>290</td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td>4</td>
-                                <td></td>
+                                {/* <td></td>
+                                <td></td> */}
                                 <td>4</td>
                                 <td>200</td>
                             </tr>
